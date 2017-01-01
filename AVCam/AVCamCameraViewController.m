@@ -90,12 +90,15 @@ static bool detected = false;
                     NSString* gender = [face objectForKey:@"gender"];
                     int genscore = [gender intValue];
                     NSString* sex = @"女";
-                    self.faceLabel.textColor = [UIColor redColor];
+                    self.faceLabel.backgroundColor = [UIColor redColor];
+                    self.faceLabel.alpha = 0.1;
                     if (genscore > 50) {
                         sex = @"男";
-                        self.faceLabel.textColor = [UIColor blueColor];
+                        self.faceLabel.backgroundColor = [UIColor blueColor];
+                        self.faceLabel.alpha = 0.1;
                     }
-                    self.faceLabel.text = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
+                    //self.faceLabel.text = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
+                    self.navigationItem.title = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
                     NSLog(@"responseObject: %@", [face description]);
                 }
 
