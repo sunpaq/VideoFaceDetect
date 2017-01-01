@@ -63,9 +63,12 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="3eR-Rn-XpZ" userLabel="Preview" customClass="AVCamPreviewView">
                                 <rect key="frame" x="0.0" y="0.0" width="668" height="331"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jSz-T6-Ewg">
-                                        <rect key="frame" x="503" y="195" width="157" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jSz-T6-Ewg">
+                                        <rect key="frame" x="511" y="203" width="157" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="157" id="O0p-Os-Pvy"/>
+                                            <constraint firstAttribute="height" constant="128" id="UA8-kn-nlf"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -74,6 +77,10 @@
                                 </accessibility>
                                 <rect key="contentStretch" x="0.0" y="0.25" width="1" height="1"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="jSz-T6-Ewg" firstAttribute="trailing" secondItem="3eR-Rn-XpZ" secondAttribute="trailingMargin" id="7Qd-Zn-sUP"/>
+                                    <constraint firstItem="jSz-T6-Ewg" firstAttribute="bottom" secondItem="3eR-Rn-XpZ" secondAttribute="bottomMargin" id="9vt-TP-7W3"/>
+                                </constraints>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="fY6-qX-ntV" appends="YES" id="G6D-dx-xU8"/>
                                 </connections>

@@ -368,12 +368,12 @@ static bool detected = false;
 				handled by -[AVCamCameraViewController viewWillTransitionToSize:withTransitionCoordinator:].
 			*/
 			UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
-			AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
+			AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationLandscapeRight;
 			if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
 				initialVideoOrientation = (AVCaptureVideoOrientation)statusBarOrientation;
 			}
 			
-			self.previewView.videoPreviewLayer.connection.videoOrientation = initialVideoOrientation;
+            self.previewView.videoPreviewLayer.connection.videoOrientation = initialVideoOrientation;
 		} );
 	}
 	else {

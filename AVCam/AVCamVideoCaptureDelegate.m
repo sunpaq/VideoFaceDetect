@@ -121,7 +121,7 @@
     if (cimage) {
         CGImageRef facecrop = [self.cicontext createCGImage:cimage fromRect:_frame];
         UIImage* face = [UIImage imageWithCGImage:facecrop];
-        self.camviewController.faceImage = [self rotate:face andOrientation:face.imageOrientation];
+        self.camviewController.faceImage = face; //[self rotate:face andOrientation:face.imageOrientation];
     }
     
     CGFloat x = _frame.origin.x / uimage.size.width;
@@ -129,7 +129,7 @@
     CGFloat w = _frame.size.width / uimage.size.width;
     CGFloat h = _frame.size.height / uimage.size.height;
     
-    _scaleFrame = CGRectMake(x, y, w, h);
+    _scaleFrame = CGRectMake(1.0-x-w, 1.0-y-h, w, h);
     
     [self.camviewController updateFaceLabelFrameInUIThread:_scaleFrame WithData:dict];
 }
