@@ -15,6 +15,7 @@
 		7A74447A1CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7444791CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m */; };
 		7A74447C1CEE6B4B00C70C83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */; };
 		7A74447E1CEE6B5900C70C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447D1CEE6B5900C70C83 /* Main.storyboard */; };
+		F8BE1BD31E1B450A0028625C /* MainViewContorller.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE1BD21E1B450A0028625C /* MainViewContorller.m */; };
 		FDDCC5CB1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5CA1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m */; };
 		FDDCC5E81E18291C007A13B1 /* Auth.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5E01E18291C007A13B1 /* Auth.m */; };
 		FDDCC5E91E18291C007A13B1 /* Conf.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5E21E18291C007A13B1 /* Conf.m */; };
@@ -57,6 +58,8 @@
 		7A7444791CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPhotoCaptureDelegate.m; sourceTree = "<group>"; };
 		7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A74447D1CEE6B5900C70C83 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F8BE1BD21E1B450A0028625C /* MainViewContorller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewContorller.m; sourceTree = "<group>"; };
+		F8BE1BD41E1B451C0028625C /* MainViewContorller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewContorller.h; sourceTree = "<group>"; };
 		FDDCC5CA1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamVideoCaptureDelegate.m; sourceTree = "<group>"; };
 		FDDCC5CC1E17A593007A13B1 /* AVCamVideoCaptureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamVideoCaptureDelegate.h; sourceTree = "<group>"; };
 		FDDCC5DF1E18291C007A13B1 /* Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Auth.h; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 			children = (
 				220626821A1E345E00A45150 /* AVCamAppDelegate.h */,
 				220626831A1E345E00A45150 /* AVCamAppDelegate.m */,
+				F8BE1BD41E1B451C0028625C /* MainViewContorller.h */,
+				F8BE1BD21E1B450A0028625C /* MainViewContorller.m */,
 				220626841A1E345E00A45150 /* AVCamPreviewView.h */,
 				220626851A1E345E00A45150 /* AVCamPreviewView.m */,
 				220626861A1E345E00A45150 /* AVCamCameraViewController.h */,
@@ -286,6 +291,7 @@
 				2206265F1A1E330400A45150 /* main.m in Sources */,
 				220626891A1E345E00A45150 /* AVCamPreviewView.m in Sources */,
 				FDDCC5E81E18291C007A13B1 /* Auth.m in Sources */,
+				F8BE1BD31E1B450A0028625C /* MainViewContorller.m in Sources */,
 				2206268A1A1E345E00A45150 /* AVCamCameraViewController.m in Sources */,
 				FDDCC5CB1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m in Sources */,
 				7A74447A1CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m in Sources */,
@@ -405,7 +411,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oreisoft.facescandemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos10.2;
 			};
 			name = Debug;
 		};
@@ -419,7 +425,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.oreisoft.facescandemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos10.2;
 			};
 			name = Release;
 		};

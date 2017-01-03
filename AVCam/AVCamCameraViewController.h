@@ -65,6 +65,9 @@ typedef NS_ENUM( NSInteger, AVCamCaptureMode ) {
 @property (nonatomic, strong) UILabel *faceLabel;
 @property (nonatomic, strong) UIImage *faceImage;
 
+// Face management
+
+
 - (void) updateFaceLabelFrameInUIThread:(CGRect)frame WithData:(NSDictionary*)data;
 
 @end

@@ -8,6 +8,71 @@
 
 #import "AVCamAppDelegate.h"
 
+static AVCamAppDelegate* _instance = nil;
+
+//Private
+@interface AVCamAppDelegate()
+@property (nonatomic, strong) NSMutableDictionary* personDatas;
+- (void) increasePersonId;
+@end
+
 @implementation AVCamAppDelegate
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+    _instance = self;
+    _groupName = @"schindler-sodec";
+
+    NSString *auth = [Auth appSign:1000000 userId:nil];
+    self.sdk = [[TXQcloudFrSDK alloc] initWithName:[Conf instance].appId
+                                     authorization:auth
+                                          endPoint:[Conf instance].API_END_POINT];
+    
+    //resume datas
+    self.lastAssignedPersonId = [[NSUserDefaults standardUserDefaults] objectForKey:@"lastAssignedPersonId"];
+    if (self.lastAssignedPersonId <= 0) {
+        self.lastAssignedPersonId = [NSNumber numberWithInt:1];
+    }
+    
+    self.personDatas = [[NSUserDefaults standardUserDefaults] objectForKey:@"personDatas"];
+    if (self.personDatas == nil) {
+        self.personDatas = [NSMutableDictionary dictionary];
+    }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
+    [defs setObject:self.lastAssignedPersonId forKey:@"lastAssignedPersonId"];
+    [defs setObject:self.personDatas forKey:@"personDatas"];
+}
+
++ (AVCamAppDelegate*) getInstance
+{
+    return _instance;
+}
+
+- (void) increasePersonId
+{
+    self.lastAssignedPersonId = [NSNumber numberWithInt:[self.lastAssignedPersonId intValue] + 1];
+}
+
+- (void) addPersonName:(NSString*)name WithTag:(NSString*)tag
+{
+    if (_personDatas) {
+        [self increasePersonId];
+        [_personDatas setObject:name
+                         forKey:[NSString stringWithFormat:@"person%@",
+                                 [self.lastAssignedPersonId stringValue]]];
+    }
+}
+
+- (NSString*) getPersonNameFromId:(NSString*)personId
+{
+    if (_personDatas) {
+        return [_personDatas objectForKey:personId];
+    }
+    return @"火星网友";
+}
 
 @end

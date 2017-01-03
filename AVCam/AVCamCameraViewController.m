@@ -8,9 +8,7 @@
 
 #import "AVCamCameraViewController.h"
 #import "AVCamVideoCaptureDelegate.h"
-#import "TXQcloudFrSDK.h"
-#import "Auth.h"
-#import "Conf.h"
+#import "AVCamAppDelegate.h"
 
 static void * SessionRunningContext = &SessionRunningContext;
 
@@ -33,23 +31,11 @@ static void * SessionRunningContext = &SessionRunningContext;
 
 @interface AVCamCameraViewController ()
 @property (nonatomic, strong) AVCamVideoCaptureDelegate* sampleBufferDelegate;
-@property (nonatomic, strong) TXQcloudFrSDK *sdk;
 @end
 
 @implementation AVCamCameraViewController
 
 #pragma mark View Controller Life Cycle
-
-//- (CGRect) previewFrame
-//{
-//    CGPoint center = self.previewView.center;
-//    CGSize  size   = self.previewView.frame.size;
-//    return CGRectMake(center.x - size.width / 2.0,
-//                      center.y - size.height / 2.0,
-//                      size.width,
-//                      size.height);
-//}
-
 
 //[dict setValue:@"true" forKey:@"hasSmile"];
 //[dict setValue:[NSNumber numberWithInt:f.trackingID] forKey:@"trackingID"];
@@ -80,7 +66,33 @@ static bool detected = false;
                 self.faceView.image = face;
             }
             
-            [self.sdk detectFace:face successBlock:^(id responseObject) {
+            AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+            [app.sdk faceIdentify:face groupId:app.groupName successBlock:^(id responseObject) {
+                //SUCCESS
+                NSDictionary* dict = (NSDictionary*)responseObject;
+                NSArray* candidates = [dict objectForKey:@"candidates"];
+                if ([candidates count] > 0) {
+                    NSDictionary* face = [candidates objectAtIndex:0];//most like
+                    NSString* person_id = [face objectForKey:@"person_id"];
+                    NSNumber* confidence = [face objectForKey:@"confidence"];
+                    NSString* tag = [face objectForKey:@"tag"];
+                    
+                    NSString* name = [app getPersonNameFromId:person_id];
+                    NSString* info = [NSString stringWithFormat:@"姓名：%@ 置信度：%f 标签：%@",
+                                      name, [confidence floatValue], tag];
+                    
+                    self.navigationItem.title = info;
+                    self.faceLabel.backgroundColor = [UIColor redColor];
+                    self.faceLabel.alpha = 0.1;
+                }
+                
+            } failureBlock:^(NSError *error) {
+                //FAIL
+                NSLog(@"error: %@\n", error.description);
+            }];
+            
+            /*
+            [[AVCamAppDelegate getInstance].sdk detectFace:face successBlock:^(id responseObject) {
                 NSDictionary* dict = (NSDictionary*)responseObject;
                 NSArray* faces = [dict objectForKey:@"face"];
                 if ([faces count] > 0) {
@@ -107,13 +119,11 @@ static bool detected = false;
             }failureBlock:^(NSError *error) {
                 //NSLog(@"error: %@\n", error.description);
             }];
-            
+            */
         }
         else {
             //NSLog(@"error: image is nil");
         }
-        
-        
         
         CGRect scaleFrame = frame;
         CGRect viewFrame  = _previewView.frame;
@@ -136,9 +146,6 @@ static bool detected = false;
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-    
-    NSString *auth = [Auth appSign:1000000 userId:nil];
-    self.sdk = [[TXQcloudFrSDK alloc] initWithName:[Conf instance].appId authorization:auth endPoint:[Conf instance].API_END_POINT];
     
     self.faceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.faceLabel.backgroundColor = [UIColor colorWithRed:0.9 green:1.0 blue:0.9 alpha:0.25];
