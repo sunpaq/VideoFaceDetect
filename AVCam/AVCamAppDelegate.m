@@ -71,8 +71,8 @@ static AVCamAppDelegate* _instance = nil;
 
 - (NSString*) getPersonNameFromId:(NSString*)personId
 {
-    if (_personDatas) {
-        return [_personDatas objectForKey:personId];
+    if (self.personDatas) {
+        return [self.personDatas objectForKey:personId];
     }
     return @"火星网友";
 }

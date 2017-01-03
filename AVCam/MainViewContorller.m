@@ -22,7 +22,7 @@
     AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
     self.addFaceButton.title = [NSString stringWithFormat:@"加脸入组（%@）", app.groupName];
     
-    self.existingPersons.text = [app.personDatas description];
+    self.existingPersons.text = [[app.personDatas allKeys] description];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
