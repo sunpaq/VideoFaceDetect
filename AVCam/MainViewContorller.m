@@ -19,10 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.addFaceButton.title = [NSString stringWithFormat:@"加脸入组（%@）",
-                                [AVCamAppDelegate getInstance].groupName];
+    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+    self.addFaceButton.title = [NSString stringWithFormat:@"加脸入组（%@）", app.groupName];
     
-    
+    self.existingPersons.text = [app.personDatas description];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
@@ -98,8 +98,17 @@
              personTag:self.personTagField.text
           successBlock:^(id responseObject) {
             // upload to TX success
-            self.uploadResultText.text = [responseObject description];
-            [app addPersonName:self.personNameField.text WithTag:self.personTagField.text];
+            NSDictionary* dict = (NSDictionary*)responseObject;
+            NSNumber* errorcode = [dict objectForKey:@"errorcode"];
+              if ([errorcode intValue] == 0) {
+                  self.uploadResultText.text = [responseObject description];
+                  [app addPersonName:self.personNameField.text WithTag:self.personTagField.text];
+              } else {
+                  NSString* errormsg = [dict objectForKey:@"errormsg"];
+                  self.uploadResultText.text = errormsg;
+              }
+              
+
     } failureBlock:^(NSError *error) {
         // upload to TX failed
         self.uploadResultText.text = error.description;

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *personTagField;
 @property (weak, nonatomic) IBOutlet UITextView *uploadResultText;
 @property (weak, nonatomic) IBOutlet UITextField *deletePersonId;
+@property (weak, nonatomic) IBOutlet UITextView *existingPersons;
 
 - (IBAction)onAddFaceButtonClicked:(id)sender;
 - (IBAction)onUploadFaceButtonClicked:(id)sender;

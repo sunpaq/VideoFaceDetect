@@ -67,6 +67,13 @@
                                             <action selector="onDeleteFaceButtonClicked:" destination="fpJ-eV-6qB" eventType="touchUpInside" id="Fz2-LJ-NzZ"/>
                                         </connections>
                                     </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="existing data" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8pR-Ct-ECO">
+                                        <rect key="frame" x="685" y="149" width="313" height="320"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="person id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gDk-ts-2Zu">
                                         <rect key="frame" x="685" y="110" width="130" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -102,6 +109,7 @@
                     <connections>
                         <outlet property="addFaceButton" destination="lKt-Tc-w20" id="8Kx-4h-3cl"/>
                         <outlet property="deletePersonId" destination="gDk-ts-2Zu" id="Zg1-UC-bas"/>
+                        <outlet property="existingPersons" destination="8pR-Ct-ECO" id="HDT-A7-8OQ"/>
                         <outlet property="faceImageView" destination="mrq-AA-RqI" id="G0a-IE-IlE"/>
                         <outlet property="personNameField" destination="rqD-2Q-G9G" id="QR6-j3-CED"/>
                         <outlet property="personTagField" destination="wZB-hk-ZWm" id="bTm-F9-Hur"/>

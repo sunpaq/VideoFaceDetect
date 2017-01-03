@@ -19,6 +19,8 @@
 @property (strong, nonatomic) NSString* groupName;
 @property (nonatomic) NSNumber* lastAssignedPersonId;
 
+@property (nonatomic, strong) NSDictionary* personDatas;
+
 + (AVCamAppDelegate*) getInstance;
 - (void) addPersonName:(NSString*)name WithTag:(NSString*)tag;
 - (NSString*) getPersonNameFromId:(NSString*)personId;

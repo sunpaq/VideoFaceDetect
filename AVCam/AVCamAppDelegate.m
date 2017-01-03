@@ -12,7 +12,6 @@ static AVCamAppDelegate* _instance = nil;
 
 //Private
 @interface AVCamAppDelegate()
-@property (nonatomic, strong) NSMutableDictionary* personDatas;
 - (void) increasePersonId;
 @end
 
@@ -36,7 +35,7 @@ static AVCamAppDelegate* _instance = nil;
     
     self.personDatas = [[NSUserDefaults standardUserDefaults] objectForKey:@"personDatas"];
     if (self.personDatas == nil) {
-        self.personDatas = [NSMutableDictionary dictionary];
+        self.personDatas = [NSDictionary dictionary];
     }
 }
 
@@ -59,11 +58,14 @@ static AVCamAppDelegate* _instance = nil;
 
 - (void) addPersonName:(NSString*)name WithTag:(NSString*)tag
 {
-    if (_personDatas) {
+    if (self.personDatas) {
         [self increasePersonId];
-        [_personDatas setObject:name
-                         forKey:[NSString stringWithFormat:@"person%@",
-                                 [self.lastAssignedPersonId stringValue]]];
+        
+        NSMutableDictionary* dict = [self.personDatas mutableCopy];
+        [dict setObject:name forKey:[NSString stringWithFormat:@"person%@",
+                                     [self.lastAssignedPersonId stringValue]]];
+        
+        self.personDatas = dict;
     }
 }
 
