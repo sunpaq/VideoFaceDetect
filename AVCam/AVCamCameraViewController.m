@@ -70,9 +70,9 @@ static bool detected = false;
     dispatch_async(dispatch_get_main_queue(), ^{
         
         count++;
-        if (count > 10 && self.faceImage) {
+        if (self.faceImage) {
             count = 0;
-            UIImage* test = [UIImage imageNamed:@"face.jpg"];
+            //UIImage* test = [UIImage imageNamed:@"face.jpg"];
             
             NSData* pngdata = UIImageJPEGRepresentation(self.faceImage, 1.0);
             UIImage* face = [UIImage imageWithData:pngdata];
@@ -100,6 +100,8 @@ static bool detected = false;
                     //self.faceLabel.text = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
                     self.navigationItem.title = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
                     NSLog(@"responseObject: %@", [face description]);
+                    detected = true;
+                    
                 }
 
             }failureBlock:^(NSError *error) {
