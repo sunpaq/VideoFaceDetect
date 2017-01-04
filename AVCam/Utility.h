@@ -9,6 +9,7 @@
 + (CGRect) scaleRectOfBigSize:(CGSize)bigSize BySmallRect:(CGRect)smallRect;
 + (CGRect) mirrorRect:(CGRect)rect;
 + (CGRect) multiplyRect:(CGRect)rect ByScaleRect:(CGRect)scaleRect;
++ (NSString*) stringFromData:(NSData*)data;
 
 @end
 

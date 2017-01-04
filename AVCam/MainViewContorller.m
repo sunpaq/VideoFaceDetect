@@ -94,7 +94,7 @@
             NSNumber* errorcode = [dict objectForKey:@"errorcode"];
               if ([errorcode intValue] == 0) {
                   self.uploadResultText.text = [responseObject description];
-                  [app addPersonName:self.personNameField.text WithTag:self.personTagField.text];
+                  //[app addPersonName:self.personNameField.text WithTag:self.personTagField.text];
               } else {
                   NSString* errormsg = [dict objectForKey:@"errormsg"];
                   self.uploadResultText.text = errormsg;

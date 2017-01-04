@@ -13,7 +13,7 @@
 @property (nonatomic, strong) NSDictionary* personDatas;
 
 + (AVCamAppDelegate*) getInstance;
-- (void) addPersonName:(NSString*)name WithTag:(NSString*)tag;
+- (void) addPersonName:(NSString*)name WithId:(NSString*)pid WithTag:(NSString*)tag;
 - (NSString*) getPersonNameFromId:(NSString*)personId;
 
 @end

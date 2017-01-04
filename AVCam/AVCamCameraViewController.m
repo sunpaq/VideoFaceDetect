@@ -2,6 +2,7 @@
 #import "AVCamVideoCaptureDelegate.h"
 #import "AVCamAppDelegate.h"
 #import "UIImage+GrayScale.h"
+#import "ResultViewController.h"
 
 static void * SessionRunningContext = &SessionRunningContext;
 
@@ -30,21 +31,29 @@ static void * SessionRunningContext = &SessionRunningContext;
 
 #pragma mark View Controller Life Cycle
 
+- (void) resultViewClosed
+{
+    //start camera
+    if (!self.session.isRunning) {
+        [self.session startRunning];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"showResultView"]) {
+        ResultViewController* res = (ResultViewController*)segue.destinationViewController;
+        res.onCloseDelegate = self;
+        res.resultImage = self.faceImage;
+        res.resultText1 = @"";
+        res.resultText2 = @"";
+        res.resultText3 = @"";
+    }
+}
+
 - (void) onFaceDetected:(UIImage*)faceImage
 {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"My Alert"
-                                                                   message:@"This is an alert."
-                                                            preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIImageView* imageView = [[UIImageView alloc] init];
-    imageView.image = faceImage;
-    [alert.view addSubview:imageView];
-    
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                          handler:^(UIAlertAction * action) {}];
-    
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    [self performSegueWithIdentifier:@"showResultView" sender:self];
 }
 
 //[dict setValue:@"true" forKey:@"hasSmile"];
@@ -58,11 +67,86 @@ static void * SessionRunningContext = &SessionRunningContext;
 static int count = 0;
 static bool detected = false;
 
+
+- (void) callDetectFaceAPI:(UIImage*)face
+{
+    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+
+    [app.sdk detectFace:face successBlock:^(id responseObject) {
+        NSDictionary* dict = (NSDictionary*)responseObject;
+        NSArray* faces = [dict objectForKey:@"face"];
+        if ([faces count] > 0) {
+            NSDictionary* face = [faces objectAtIndex:0];
+            NSString* beauty = [face objectForKey:@"beauty"];
+            NSString* age = [face objectForKey:@"age"];
+            NSString* gender = [face objectForKey:@"gender"];
+            int genscore = [gender intValue];
+            NSString* sex = @"女";
+            //self.faceLabel.backgroundColor = [UIColor redColor];
+            //self.faceLabel.alpha = 0.1;
+            if (genscore > 50) {
+                sex = @"男";
+                //self.faceLabel.backgroundColor = [UIColor blueColor];
+                //self.faceLabel.alpha = 0.1;
+            }
+            //self.faceLabel.text = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
+            self.navigationItem.title = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
+            NSLog(@"responseObject: %@", [face description]);
+            detected = true;
+            
+            //stop camera
+            if (self.session.isRunning) {
+                [self.session stopRunning];
+            }
+            
+            //pop up
+            [self onFaceDetected:self.faceImage];
+        }
+        
+    }failureBlock:^(NSError *error) {
+        //NSLog(@"error: %@\n", error.description);
+    }];
+}
+
+- (void) callIdentifyFaceAPI:(UIImage*)face
+{
+    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+
+    [app.sdk faceIdentify:face groupId:app.groupName successBlock:^(id responseObject) {
+        //SUCCESS
+        NSDictionary* dict = (NSDictionary*)responseObject;
+        NSArray* candidates = [dict objectForKey:@"candidates"];
+        if ([candidates count] > 0) {
+            NSDictionary* face = [candidates objectAtIndex:0];//most like
+            NSString* person_id = [face objectForKey:@"person_id"];
+            NSNumber* confidence = [face objectForKey:@"confidence"];
+            NSString* tag = [face objectForKey:@"tag"];
+            
+            NSString* name = [app getPersonNameFromId:person_id];
+            NSString* info = [NSString stringWithFormat:@"姓名：%@ 置信度：%f 标签：%@",
+                              name, [confidence floatValue], tag];
+            
+            self.navigationItem.title = info;
+            //self.faceLabel.backgroundColor = [UIColor redColor];
+            //self.faceLabel.alpha = 0.1;
+            
+            //stop camera
+            if (self.session.isRunning) {
+                [self.session stopRunning];
+            }
+            
+            //pop up
+            [self onFaceDetected:self.faceImage];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        //FAIL
+        NSLog(@"error: %@\n", error.description);
+    }];
+}
+
 - (void) updateFaceLabelFrameInUIThread:(CGRect)frame WithData:(NSDictionary*)data
 {
-    //self.data = data;
-
-
     dispatch_async(dispatch_get_main_queue(), ^{
         
         count++;
@@ -79,72 +163,7 @@ static bool detected = false;
                 self.faceView.image = face;
             }
             
-            AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
-            
-            if (self.beautySwitch.isOn) {
-                [app.sdk detectFace:face successBlock:^(id responseObject) {
-                    NSDictionary* dict = (NSDictionary*)responseObject;
-                    NSArray* faces = [dict objectForKey:@"face"];
-                    if ([faces count] > 0) {
-                        NSDictionary* face = [faces objectAtIndex:0];
-                        NSString* beauty = [face objectForKey:@"beauty"];
-                        NSString* age = [face objectForKey:@"age"];
-                        NSString* gender = [face objectForKey:@"gender"];
-                        int genscore = [gender intValue];
-                        NSString* sex = @"女";
-                        //self.faceLabel.backgroundColor = [UIColor redColor];
-                        //self.faceLabel.alpha = 0.1;
-                        if (genscore > 50) {
-                            sex = @"男";
-                            //self.faceLabel.backgroundColor = [UIColor blueColor];
-                            //self.faceLabel.alpha = 0.1;
-                        }
-                        //self.faceLabel.text = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
-                        self.navigationItem.title = [NSString stringWithFormat:@"颜值:%@ 年龄:%@ 性别:%@", beauty, age, sex];
-                        NSLog(@"responseObject: %@", [face description]);
-                        detected = true;
-                        
-                    }
-                    
-                }failureBlock:^(NSError *error) {
-                    //NSLog(@"error: %@\n", error.description);
-                }];
-            }
-            
-            else {
-                [app.sdk faceIdentify:face groupId:app.groupName successBlock:^(id responseObject) {
-                    //SUCCESS
-                    NSDictionary* dict = (NSDictionary*)responseObject;
-                    NSArray* candidates = [dict objectForKey:@"candidates"];
-                    if ([candidates count] > 0) {
-                        NSDictionary* face = [candidates objectAtIndex:0];//most like
-                        NSString* person_id = [face objectForKey:@"person_id"];
-                        NSNumber* confidence = [face objectForKey:@"confidence"];
-                        NSString* tag = [face objectForKey:@"tag"];
-                        
-                        NSString* name = [app getPersonNameFromId:person_id];
-                        NSString* info = [NSString stringWithFormat:@"姓名：%@ 置信度：%f 标签：%@",
-                                          name, [confidence floatValue], tag];
-                        
-                        self.navigationItem.title = info;
-                        //self.faceLabel.backgroundColor = [UIColor redColor];
-                        //self.faceLabel.alpha = 0.1;
-                        
-                        
-                    }
-                    
-                } failureBlock:^(NSError *error) {
-                    //FAIL
-                    NSLog(@"error: %@\n", error.description);
-                }];
-            }
-            
-            
-
-            
-            /*
-
-            */
+            [self callIdentifyFaceAPI:face];
         }
         else {
             //NSLog(@"error: image is nil");

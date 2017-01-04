@@ -60,4 +60,5 @@ typedef NS_ENUM( NSInteger, AVCamCaptureMode ) {
 
 - (void) updateFaceLabelFrameInUIThread:(CGRect)frame WithData:(NSDictionary*)data;
 
+- (void) resultViewClosed;
 @end

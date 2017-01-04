@@ -48,7 +48,7 @@ static AVCamAppDelegate* _instance = nil;
     self.lastAssignedPersonId = [NSNumber numberWithInt:[self.lastAssignedPersonId intValue] + 1];
 }
 
-- (void) addPersonName:(NSString*)name WithTag:(NSString*)tag
+- (void) addPersonName:(NSString*)name WithId:(NSString*)pid WithTag:(NSString*)tag
 {
     if (self.personDatas) {
         [self increasePersonId];

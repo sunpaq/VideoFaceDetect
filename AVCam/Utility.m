@@ -32,4 +32,9 @@
     return frame;
 }
 
++ (NSString*) stringFromData:(NSData*)data
+{
+    return [NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding];
+}
+
 @end
