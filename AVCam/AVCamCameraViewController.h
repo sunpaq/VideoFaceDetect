@@ -50,8 +50,6 @@ typedef NS_ENUM( NSInteger, AVCamCaptureMode ) {
 // Capturing photos.
 @property (nonatomic, weak) IBOutlet UIButton *photoButton;
 @property (nonatomic) AVCapturePhotoOutput *photoOutput;
-//@property (nonatomic) NSMutableDictionary<NSNumber *, AVCamPhotoCaptureDelegate *> *inProgressPhotoCaptureDelegates;
-//@property (nonatomic) NSInteger inProgressLivePhotoCapturesCount;
 
 // Recording movies.
 @property (nonatomic, weak) IBOutlet UIButton *recordButton;
@@ -62,8 +60,9 @@ typedef NS_ENUM( NSInteger, AVCamCaptureMode ) {
 
 // Face detect
 @property (weak, nonatomic) IBOutlet UIImageView *faceView;
-@property (nonatomic, strong) UILabel *faceLabel;
+//@property (nonatomic, strong) UILabel *faceLabel;
 @property (nonatomic, strong) UIImage *faceImage;
+@property (weak, nonatomic) IBOutlet UISwitch *beautySwitch;
 
 // Face management
 

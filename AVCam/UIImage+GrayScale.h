@@ -21,7 +21,8 @@ typedef enum {
     RED = 3
 } PIXELS;
 
-- (UIImage *)convertToGrayscale;
+- (UIImage*) convertToGrayscale;
+- (UIImage*) rotate:(UIImage*)src andOrientation:(UIImageOrientation)orientation;
 
 @end
 

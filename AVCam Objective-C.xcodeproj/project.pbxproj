@@ -16,6 +16,7 @@
 		7A74447C1CEE6B4B00C70C83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */; };
 		7A74447E1CEE6B5900C70C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447D1CEE6B5900C70C83 /* Main.storyboard */; };
 		F87AE4FB1E1C821B0022D834 /* UIImage+GrayScale.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE4FA1E1C821B0022D834 /* UIImage+GrayScale.m */; };
+		F87AE4FE1E1C95110022D834 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE4FD1E1C95110022D834 /* Utility.m */; };
 		F8BE1BD31E1B450A0028625C /* MainViewContorller.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE1BD21E1B450A0028625C /* MainViewContorller.m */; };
 		FDDCC5CB1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5CA1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m */; };
 		FDDCC5E81E18291C007A13B1 /* Auth.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5E01E18291C007A13B1 /* Auth.m */; };
@@ -61,6 +62,8 @@
 		7A74447D1CEE6B5900C70C83 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F87AE4FA1E1C821B0022D834 /* UIImage+GrayScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GrayScale.m"; sourceTree = "<group>"; };
 		F87AE4FC1E1C822D0022D834 /* UIImage+GrayScale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+GrayScale.h"; sourceTree = "<group>"; };
+		F87AE4FD1E1C95110022D834 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
+		F87AE4FF1E1C95240022D834 /* Utility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utility.h; sourceTree = "<group>"; };
 		F8BE1BD21E1B450A0028625C /* MainViewContorller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewContorller.m; sourceTree = "<group>"; };
 		F8BE1BD41E1B451C0028625C /* MainViewContorller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewContorller.h; sourceTree = "<group>"; };
 		FDDCC5CA1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamVideoCaptureDelegate.m; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				2206265E1A1E330400A45150 /* main.m */,
 				F87AE4FA1E1C821B0022D834 /* UIImage+GrayScale.m */,
 				F87AE4FC1E1C822D0022D834 /* UIImage+GrayScale.h */,
+				F87AE4FD1E1C95110022D834 /* Utility.m */,
+				F87AE4FF1E1C95240022D834 /* Utility.h */,
 			);
 			path = AVCam;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				FDDCC5EB1E18291C007A13B1 /* NSData+Base64.m in Sources */,
 				FDDCC5EA1E18291C007A13B1 /* TXQcloudFrSDK.m in Sources */,
 				FDDCC5E91E18291C007A13B1 /* Conf.m in Sources */,
+				F87AE4FE1E1C95110022D834 /* Utility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

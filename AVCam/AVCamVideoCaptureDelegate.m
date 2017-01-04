@@ -12,6 +12,7 @@
 
 #import "AVCamVideoCaptureDelegate.h"
 #import "UIImage+GrayScale.h"
+#import "Utility.h"
 
 @interface AVCamVideoCaptureDelegate ()
 {
@@ -40,29 +41,6 @@
         return self;
     }
     return nil;
-}
-
--(UIImage*) rotate:(UIImage*) src andOrientation:(UIImageOrientation)orientation
-{
-    UIGraphicsBeginImageContext(src.size);
-    
-    CGContextRef context=(UIGraphicsGetCurrentContext());
-    
-    if (orientation == UIImageOrientationRight) {
-        CGContextRotateCTM (context, 90/180*M_PI) ;
-    } else if (orientation == UIImageOrientationLeft) {
-        CGContextRotateCTM (context, -90/180*M_PI);
-    } else if (orientation == UIImageOrientationDown) {
-        //CGContextRotateCTM (context, 90/180*M_PI);
-    } else if (orientation == UIImageOrientationUp) {
-        CGContextRotateCTM (context, 90/180*M_PI);
-    }
-    
-    [src drawAtPoint:CGPointMake(0, 0)];
-    UIImage *img=UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return img;
-    
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer
@@ -124,12 +102,8 @@
         self.camviewController.faceImage = [face convertToGrayscale];
     }
     
-    CGFloat x = _frame.origin.x / uimage.size.width;
-    CGFloat y = _frame.origin.y / uimage.size.height;
-    CGFloat w = _frame.size.width / uimage.size.width;
-    CGFloat h = _frame.size.height / uimage.size.height;
-    
-    _scaleFrame = CGRectMake(1.0-x-w, 1.0-y-h, w, h);
+    CGRect scaleRect = [Utility scaleRectOfBigSize:uimage.size BySmallRect:_frame];
+    _scaleFrame = [Utility mirrorRect:scaleRect];
     
     [self.camviewController updateFaceLabelFrameInUIThread:_scaleFrame WithData:dict];
 }
