@@ -1,15 +1,6 @@
-/*
-	Copyright (C) 2016 Apple Inc. All Rights Reserved.
-	See LICENSE.txt for this sample’s licensing information
-	
-	Abstract:
-	View controller for camera interface.
-*/
-
-@import UIKit;
-@import Photos;
-@import AVFoundation;
-
+#import <UIKit/UIKit.h>
+#import <Photos/Photos.h>
+#import <AVFoundation/AVFoundation.h>
 #import "AVCamPreviewView.h"
 #import "AVCamPhotoCaptureDelegate.h"
 

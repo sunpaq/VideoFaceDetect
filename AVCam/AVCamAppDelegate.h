@@ -1,13 +1,4 @@
-/*
-	Copyright (C) 2016 Apple Inc. All Rights Reserved.
-	See LICENSE.txt for this sample’s licensing information
-	
-	Abstract:
-	Application delegate.
-*/
-
-@import UIKit;
-
+#import <UIKit/UIKit.h>
 #import "TXQcloudFrSDK.h"
 #import "Auth.h"
 #import "Conf.h"

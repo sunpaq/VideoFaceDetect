@@ -1,15 +1,6 @@
-//
-//  AVCamVideoCaptureDelegate.m
-//  AVCam Objective-C
-//
-//  Created by Sun YuLi on 2016/12/31.
-//
-//
-
-@import Foundation;
-@import CoreImage;
-@import CoreGraphics;
-
+#import <Foundation/Foundation.h>
+#import <CoreImage/CoreImage.h>
+#import <CoreGraphics/CoreGraphics.h>
 #import "AVCamVideoCaptureDelegate.h"
 #import "UIImage+GrayScale.h"
 #import "Utility.h"

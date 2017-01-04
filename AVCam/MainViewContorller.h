@@ -1,15 +1,7 @@
-//
-//  MainViewContorller.h
-//  AVCam Objective-C
-//
-//  Created by YuliSun on 03/01/2017.
-//
-//
-
 #ifndef MainViewContorller_h
 #define MainViewContorller_h
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 @interface MainViewController : UIViewController <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 

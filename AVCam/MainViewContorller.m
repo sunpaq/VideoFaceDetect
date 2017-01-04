@@ -1,11 +1,3 @@
-//
-//  MainViewContorller.m
-//  AVCam Objective-C
-//
-//  Created by YuliSun on 03/01/2017.
-//
-//
-
 #import <Foundation/Foundation.h>
 #import "MainViewContorller.h"
 #import "AVCamAppDelegate.h"

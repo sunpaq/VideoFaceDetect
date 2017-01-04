@@ -1,15 +1,7 @@
-//
-//  AVCamVideoCaptureDelegate.h
-//  AVCam Objective-C
-//
-//  Created by Sun YuLi on 2016/12/31.
-//
-//
-
 #ifndef AVCamVideoCaptureDelegate_h
 #define AVCamVideoCaptureDelegate_h
 
-@import AVFoundation;
+#import <AVFoundation/AVFoundation.h>
 #import "AVCamCameraViewController.h"
 
 @interface AVCamVideoCaptureDelegate : NSObject<AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>

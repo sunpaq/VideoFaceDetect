@@ -1,11 +1,3 @@
-//
-//  Utility.h
-//  AVCam Objective-C
-//
-//  Created by YuliSun on 04/01/2017.
-//
-//
-
 #ifndef Utility_h
 #define Utility_h
 
