@@ -11,7 +11,7 @@
 @import CoreGraphics;
 
 #import "AVCamVideoCaptureDelegate.h"
-
+#import "UIImage+GrayScale.h"
 
 @interface AVCamVideoCaptureDelegate ()
 {
@@ -121,7 +121,7 @@
     if (cimage) {
         CGImageRef facecrop = [self.cicontext createCGImage:cimage fromRect:_frame];
         UIImage* face = [UIImage imageWithCGImage:facecrop];
-        self.camviewController.faceImage = face; //[self rotate:face andOrientation:face.imageOrientation];
+        self.camviewController.faceImage = [face convertToGrayscale];
     }
     
     CGFloat x = _frame.origin.x / uimage.size.width;

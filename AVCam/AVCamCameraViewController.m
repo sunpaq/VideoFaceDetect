@@ -9,6 +9,7 @@
 #import "AVCamCameraViewController.h"
 #import "AVCamVideoCaptureDelegate.h"
 #import "AVCamAppDelegate.h"
+#import "UIImage+GrayScale.h"
 
 static void * SessionRunningContext = &SessionRunningContext;
 
@@ -58,9 +59,12 @@ static bool detected = false;
         count++;
         if (self.faceImage) {
             count = 0;
-            //UIImage* test = [UIImage imageNamed:@"face.jpg"];
             
             NSData* pngdata = UIImageJPEGRepresentation(self.faceImage, 1.0);
+            if (pngdata) {
+                NSLog(@"png image size: %lu\n", (unsigned long)[pngdata length]);
+            }
+            
             UIImage* face = [UIImage imageWithData:pngdata];
             if (face) {
                 self.faceView.image = face;
