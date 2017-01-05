@@ -16,6 +16,8 @@
 		7A74447C1CEE6B4B00C70C83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */; };
 		7A74447E1CEE6B5900C70C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447D1CEE6B5900C70C83 /* Main.storyboard */; };
 		F85AB5CA1E1DECCA0076104D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85AB5C91E1DECCA0076104D /* AboutViewController.m */; };
+		F85AB5CD1E1E21460076104D /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85AB5CC1E1E21460076104D /* SplitViewController.m */; };
+		F85AB5D31E1E260C0076104D /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = F85AB5D21E1E260C0076104D /* Person.m */; };
 		F87AE4FB1E1C821B0022D834 /* UIImage+GrayScale.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE4FA1E1C821B0022D834 /* UIImage+GrayScale.m */; };
 		F87AE4FE1E1C95110022D834 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE4FD1E1C95110022D834 /* Utility.m */; };
 		F87AE5011E1CBF900022D834 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE5001E1CBF900022D834 /* ResultViewController.m */; };
@@ -66,6 +68,11 @@
 		7A74447D1CEE6B5900C70C83 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F85AB5C91E1DECCA0076104D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		F85AB5CB1E1DECDB0076104D /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		F85AB5CC1E1E21460076104D /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
+		F85AB5CE1E1E21580076104D /* SplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
+		F85AB5CF1E1E22E90076104D /* ItemSelectedDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItemSelectedDelegate.h; sourceTree = "<group>"; };
+		F85AB5D11E1E25F80076104D /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		F85AB5D21E1E260C0076104D /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		F87AE4FA1E1C821B0022D834 /* UIImage+GrayScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GrayScale.m"; sourceTree = "<group>"; };
 		F87AE4FC1E1C822D0022D834 /* UIImage+GrayScale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+GrayScale.h"; sourceTree = "<group>"; };
 		F87AE4FD1E1C95110022D834 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
@@ -142,8 +149,12 @@
 		2206265B1A1E330400A45150 /* AVCam */ = {
 			isa = PBXGroup;
 			children = (
+				F85AB5D01E1E25E20076104D /* DataModel */,
+				F85AB5CF1E1E22E90076104D /* ItemSelectedDelegate.h */,
 				220626821A1E345E00A45150 /* AppDelegate.h */,
 				220626831A1E345E00A45150 /* AppDelegate.m */,
+				F85AB5CE1E1E21580076104D /* SplitViewController.h */,
+				F85AB5CC1E1E21460076104D /* SplitViewController.m */,
 				F85AB5CB1E1DECDB0076104D /* AboutViewController.h */,
 				F85AB5C91E1DECCA0076104D /* AboutViewController.m */,
 				F8BE1BD41E1B451C0028625C /* MainViewContorller.h */,
@@ -173,6 +184,15 @@
 				F87AE4FF1E1C95240022D834 /* Utility.h */,
 			);
 			path = AVCam;
+			sourceTree = "<group>";
+		};
+		F85AB5D01E1E25E20076104D /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				F85AB5D11E1E25F80076104D /* Person.h */,
+				F85AB5D21E1E260C0076104D /* Person.m */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 		FDDCC5DE1E18291C007A13B1 /* TencentYoutuYun */ = {
@@ -319,11 +339,13 @@
 			files = (
 				220626881A1E345E00A45150 /* AppDelegate.m in Sources */,
 				F87AE5011E1CBF900022D834 /* ResultViewController.m in Sources */,
+				F85AB5D31E1E260C0076104D /* Person.m in Sources */,
 				2206265F1A1E330400A45150 /* main.m in Sources */,
 				220626891A1E345E00A45150 /* CamPreviewView.m in Sources */,
 				FDDCC5E81E18291C007A13B1 /* Auth.m in Sources */,
 				F8BE1BD31E1B450A0028625C /* MainViewContorller.m in Sources */,
 				F87AE4FB1E1C821B0022D834 /* UIImage+GrayScale.m in Sources */,
+				F85AB5CD1E1E21460076104D /* SplitViewController.m in Sources */,
 				F87AE5071E1CEF840022D834 /* PersonListViewController.m in Sources */,
 				F87AE5041E1CE3180022D834 /* PersonInfoViewController.m in Sources */,
 				F85AB5CA1E1DECCA0076104D /* AboutViewController.m in Sources */,

@@ -10,12 +10,19 @@
 #define PersonInfoViewController_h
 
 #import <UIKit/UIKit.h>
+#import "ItemSelectedDelegate.h"
 
-@interface PersonInfoViewController : UIViewController
+@interface PersonInfoViewController : UIViewController <ItemSelectedDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *addFaceButton;
 @property (weak, nonatomic) IBOutlet UIImageView *faceView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *personIdLabel;
+@property (weak, nonatomic) IBOutlet UILabel *personNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *personNumberLabel;
+
 
 @end
 

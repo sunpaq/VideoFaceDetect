@@ -49,4 +49,9 @@
     [self onCloseButtonClicked:sender];
 }
 
+- (IBAction)onSwipeLeft:(id)sender
+{
+    
+}
+
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "PersonInfoViewController.h"
 #import "Utility.h"
+#import "Person.h"
 
 @implementation PersonInfoViewController
 
@@ -18,9 +19,16 @@
     
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
+}
+
+- (void) onItemSelected:(Person*)person AtRow:(NSInteger)row
+{
+    self.personIdLabel.text = [person.Id stringValue];
+    self.personNameLabel.text = person.Name;
+    self.personNumberLabel.text = [person.EmployeeId stringValue];
 }
 
 @end

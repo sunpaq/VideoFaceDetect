@@ -32,50 +32,47 @@
                                 <rect key="frame" x="242" y="32" width="320" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o46-yc-yXe">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o46-yc-yXe">
                                 <rect key="frame" x="0.0" y="0.0" width="703" height="768"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8d-Fc-oij">
-                                        <rect key="frame" x="111.5" y="554" width="480" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PersonId" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uL-u7-EQH">
+                                        <rect key="frame" x="317" y="427" width="68" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6It-wt-Xdo">
-                                        <rect key="frame" x="111.5" y="516" width="480" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="480" id="1ul-xa-toZ"/>
-                                        </constraints>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="员工姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQZ-Nb-ifd">
+                                        <rect key="frame" x="315" y="456" width="70" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="6It-wt-Xdo" firstAttribute="top" secondItem="o46-yc-yXe" secondAttribute="top" constant="516" id="0pr-Qu-h9H"/>
-                                    <constraint firstAttribute="bottom" secondItem="b8d-Fc-oij" secondAttribute="bottom" constant="184" id="63n-JM-m37"/>
-                                    <constraint firstItem="6It-wt-Xdo" firstAttribute="trailing" secondItem="b8d-Fc-oij" secondAttribute="trailing" id="Nlx-ph-x2L"/>
-                                    <constraint firstItem="6It-wt-Xdo" firstAttribute="centerX" secondItem="o46-yc-yXe" secondAttribute="centerX" id="Qev-bd-lOw"/>
-                                    <constraint firstItem="b8d-Fc-oij" firstAttribute="top" secondItem="6It-wt-Xdo" secondAttribute="bottom" constant="8" symbolic="YES" id="U86-Uq-Lhi"/>
-                                    <constraint firstItem="6It-wt-Xdo" firstAttribute="leading" secondItem="b8d-Fc-oij" secondAttribute="leading" id="bpg-CZ-RMO"/>
-                                    <constraint firstAttribute="trailing" secondItem="6It-wt-Xdo" secondAttribute="trailing" constant="112" id="coA-CE-oPM"/>
-                                </constraints>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_face.png" translatesAutoresizingMaskIntoConstraints="NO" id="y7Y-E5-WO7">
-                                <rect key="frame" x="231.5" y="85" width="240" height="320"/>
+                                <rect key="frame" x="232" y="85" width="240" height="320"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="320" id="MX4-TI-WP2"/>
                                     <constraint firstAttribute="width" constant="240" id="a0V-VP-hmx"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mR6-op-6Vc">
-                                <rect key="frame" x="231.5" y="85" width="240" height="320"/>
+                                <rect key="frame" x="232" y="85" width="240" height="320"/>
                                 <color key="backgroundColor" white="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="添加人脸"/>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="presentation" identifier="recordFace" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="Hs2-pK-CMc"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="员工号码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMw-lG-O76">
+                                <rect key="frame" x="316" y="483" width="70" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -99,6 +96,9 @@
                         <outlet property="addFaceButton" destination="mR6-op-6Vc" id="ogi-Cd-UwR"/>
                         <outlet property="faceView" destination="y7Y-E5-WO7" id="j91-As-vJi"/>
                         <outlet property="indicator" destination="gUo-Sv-udB" id="aMh-se-Xoo"/>
+                        <outlet property="personIdLabel" destination="0uL-u7-EQH" id="08q-oI-G4N"/>
+                        <outlet property="personNameLabel" destination="ZQZ-Nb-ifd" id="O6T-5y-3au"/>
+                        <outlet property="personNumberLabel" destination="wMw-lG-O76" id="llL-kx-EJe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aky-4G-sr9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -301,7 +301,7 @@
         <!--Split View Controller-->
         <scene sceneID="d61-sA-Mlv">
             <objects>
-                <splitViewController id="dcF-gA-T50" sceneMemberID="viewController">
+                <splitViewController id="dcF-gA-T50" customClass="SplitViewController" sceneMemberID="viewController">
                     <connections>
                         <segue destination="o9e-bI-xK5" kind="relationship" relationship="masterViewController" id="2lW-wn-lKH"/>
                         <segue destination="gsp-EG-6HX" kind="relationship" relationship="detailViewController" id="oxa-tY-fTf"/>
@@ -475,6 +475,7 @@
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="PDm-4q-eXz" appends="YES" id="ESX-FO-Sgf"/>
                             <outletCollection property="gestureRecognizers" destination="GtW-gv-kJc" appends="YES" id="Uzn-jO-Tn2"/>
+                            <outletCollection property="gestureRecognizers" destination="IHJ-72-hu6" appends="YES" id="Qvl-Ig-5jD"/>
                         </connections>
                     </view>
                     <connections>
@@ -494,6 +495,11 @@
                 <swipeGestureRecognizer direction="up" id="GtW-gv-kJc">
                     <connections>
                         <action selector="onSwipeUp:" destination="ifi-Fh-UP2" id="GKe-Oh-vGQ"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="IHJ-72-hu6">
+                    <connections>
+                        <action selector="onSwipeLeft:" destination="ifi-Fh-UP2" id="xRT-hF-HnH"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

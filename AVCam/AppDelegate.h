@@ -16,4 +16,7 @@
 - (void) addPersonName:(NSString*)name WithId:(NSString*)pid WithTag:(NSString*)tag;
 - (NSString*) getPersonNameFromId:(NSString*)personId;
 
+- (void) uploadPhotoToTencent:(UIImage*)photo PersonId:(NSString*)pid PersonName:(NSString*)name Tag:(NSString*)tag;
+- (void) removePhotoFromTencent:(NSString*)pid;
+
 @end

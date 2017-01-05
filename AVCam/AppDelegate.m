@@ -1,5 +1,15 @@
 #import "AppDelegate.h"
 
+#define END_POINT @"http://eccwcl32138.global.schindler.com/FaceManagerService/api/Persons"
+#define GET_METHOD @"GET"
+
+#define NETWORK_ERR @"网络错误"
+#define DEL_SUCCESS @"删除成功"
+#define DEL_FAILED @"删除失败"
+#define UP_SUCCESS @"上传成功"
+#define UP_FAILED @"上传失败"
+#define GOT_IT @"知道了"
+
 static AppDelegate* _instance = nil;
 
 //Private
@@ -67,6 +77,56 @@ static AppDelegate* _instance = nil;
         return [self.personDatas objectForKey:personId];
     }
     return @"火星网友";
+}
+
+- (void) uploadPhotoToTencent:(UIImage*)photo PersonId:(NSString*)pid PersonName:(NSString*)name Tag:(NSString*)tag
+{
+    [self.sdk newPerson:photo
+              personId:pid
+              groupIds:[NSArray arrayWithObjects:self.groupName, nil]
+            personName:name
+             personTag:tag
+          successBlock:^(id responseObject) {
+              // upload to TX success
+              //NSDictionary* dict = (NSDictionary*)responseObject;
+              //NSNumber* errorcode = [dict objectForKey:@"errorcode"];
+              [[[UIAlertView alloc] initWithTitle:UP_SUCCESS
+                                          message:[NSString stringWithFormat:@"%@ %@", pid, UP_SUCCESS]
+                                         delegate:self
+                                cancelButtonTitle:GOT_IT
+                                otherButtonTitles:nil] show];
+              
+          } failureBlock:^(NSError *error) {
+              // upload to TX failed
+              NSString* errmsg = [NSString stringWithFormat:@"%@(%ld)", NETWORK_ERR, (long)error.code];
+              [[[UIAlertView alloc] initWithTitle:errmsg
+                                          message:error.localizedDescription
+                                         delegate:self
+                                cancelButtonTitle:GOT_IT
+                                otherButtonTitles:nil] show];
+          }];
+}
+
+- (void) removePhotoFromTencent:(NSString*)pid
+{
+    [self.sdk delPerson:pid successBlock:^(id responseObject) {
+        // delete person success
+        NSString* errmsg = [NSString stringWithFormat:@"%@", DEL_SUCCESS];
+        [[[UIAlertView alloc] initWithTitle:errmsg
+                                    message:[NSString stringWithFormat:@"%@ %@", pid, DEL_SUCCESS]
+                                   delegate:self
+                          cancelButtonTitle:GOT_IT
+                          otherButtonTitles:nil] show];
+        
+    } failureBlock:^(NSError *error) {
+        // delete person failed
+        NSString* errmsg = [NSString stringWithFormat:@"%@(%ld)", DEL_FAILED, (long)error.code];
+        [[[UIAlertView alloc] initWithTitle:errmsg
+                                    message:error.localizedDescription
+                                   delegate:self
+                          cancelButtonTitle:GOT_IT
+                          otherButtonTitles:nil] show];
+    }];
 }
 
 @end

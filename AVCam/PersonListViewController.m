@@ -1,6 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "PersonListViewController.h"
 #import "AppDelegate.h"
+#import "Person.h"
 
 #define END_POINT @"http://eccwcl32138.global.schindler.com/FaceManagerService/api/Persons"
 #define GET_METHOD @"GET"
@@ -44,23 +45,21 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    AppDelegate* app = [AppDelegate getInstance];
+    //AppDelegate* app = [AppDelegate getInstance];
     
-    NSError* jsonerr;
-    self.persons = [NSJSONSerialization JSONObjectWithData:data
-                                                   options:NSJSONReadingMutableContainers
-                                                     error:&jsonerr];
-    for (NSDictionary* person in self.persons) {
-        NSNumber* EmployeeId = [person objectForKey:@"EmployeeId"];
-        NSString* FirstName  = [person objectForKey:@"FirstName"];
-        NSString* Group      = [person objectForKey:@"Group"];
-        NSNumber* GroupId    = [person objectForKey:@"GroupId"];
-        NSNumber* Id         = [person objectForKey:@"Id"];
-        NSString* LastName   = [person objectForKey:@"LastName"];
-        NSString* Name       = [person objectForKey:@"Name"];
-        
-        [app addPersonName:Name WithId:[Id stringValue] WithTag:LastName];
-    }
+    self.persons = [Person getPersonsFromJSONData:data];
+//    for (NSDictionary* person in self.persons) {
+//        
+//        NSNumber* EmployeeId = [person objectForKey:@"EmployeeId"];
+//        NSString* FirstName  = [person objectForKey:@"FirstName"];
+//        NSString* Group      = [person objectForKey:@"Group"];
+//        NSNumber* GroupId    = [person objectForKey:@"GroupId"];
+//        NSNumber* Id         = [person objectForKey:@"Id"];
+//        NSString* LastName   = [person objectForKey:@"LastName"];
+//        NSString* Name       = [person objectForKey:@"Name"];
+//        
+//        [app addPersonName:Name WithId:[Id stringValue] WithTag:LastName];
+//    }
     
     [self.tableView reloadData];
 }
@@ -84,6 +83,17 @@
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (self.itemSelectDelegate) {
+        NSDictionary* dict = [self.persons objectAtIndex:indexPath.row];
+        Person* p = [Person personWithJSONObject:dict];
+        if (p) {
+            [self.itemSelectDelegate onItemSelected:p AtRow:indexPath.row];
+        }
+    }
 }
 
 - (IBAction)onDoneButtonClicked:(id)sender

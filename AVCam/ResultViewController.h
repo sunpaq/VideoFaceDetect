@@ -14,6 +14,7 @@
 @interface ResultViewController : UIViewController
 
 @property (weak, nonatomic) id onCloseDelegate;
+
 @property (weak, nonatomic) UIImage*  resultImage;
 @property (weak, nonatomic) NSString* resultText1;
 @property (weak, nonatomic) NSString* resultText2;
@@ -28,6 +29,7 @@
 - (IBAction)onCloseButtonClicked:(id)sender;
 - (IBAction)onSwipeDown:(id)sender;
 - (IBAction)onSwipeUp:(id)sender;
+- (IBAction)onSwipeLeft:(id)sender;
 
 @end
 

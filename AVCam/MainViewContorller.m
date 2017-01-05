@@ -81,30 +81,7 @@
         self.uploadResultText.text = @"君の名は（你的名字）？";
         return;
     }
-    AppDelegate* app = [AppDelegate getInstance];
-    
-    [app.sdk newPerson:self.faceImageView.image
-              personId:app.lastAssignedPersonId.stringValue
-              groupIds:[NSArray arrayWithObjects:app.groupName, nil]
-            personName:self.personNameField.text
-             personTag:self.personTagField.text
-          successBlock:^(id responseObject) {
-            // upload to TX success
-            NSDictionary* dict = (NSDictionary*)responseObject;
-            NSNumber* errorcode = [dict objectForKey:@"errorcode"];
-              if ([errorcode intValue] == 0) {
-                  self.uploadResultText.text = [responseObject description];
-                  //[app addPersonName:self.personNameField.text WithTag:self.personTagField.text];
-              } else {
-                  NSString* errormsg = [dict objectForKey:@"errormsg"];
-                  self.uploadResultText.text = errormsg;
-              }
-              
 
-    } failureBlock:^(NSError *error) {
-        // upload to TX failed
-        self.uploadResultText.text = error.description;
-    }];
 }
 
 - (IBAction)onDeleteFaceButtonClicked:(id)sender
@@ -113,15 +90,7 @@
         self.deletePersonId.text = @"请输入要删除的personId";
         return;
     }
-    AppDelegate* app = [AppDelegate getInstance];
-    
-    [app.sdk delPerson:self.deletePersonId.text successBlock:^(id responseObject) {
-        // delete person success
-        self.deletePersonId.text = [NSString stringWithFormat:@"%@删除成功", self.deletePersonId.text];
-    } failureBlock:^(NSError *error) {
-        // delete person failed
-        self.deletePersonId.text = [NSString stringWithFormat:@"%@删除失败", self.deletePersonId.text];
-    }];
+
 }
 
 
