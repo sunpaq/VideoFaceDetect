@@ -11,9 +11,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonListViewController : UITableViewController <UITableViewDataSource>
+@interface PersonListViewController : UITableViewController <UITableViewDataSource, NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
+- (IBAction)onDoneButtonClicked:(id)sender;
 
 @end
-
 
 #endif /* PersonListViewController_h */

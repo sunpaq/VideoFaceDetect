@@ -15,6 +15,7 @@
 		7A74447A1CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7444791CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m */; };
 		7A74447C1CEE6B4B00C70C83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */; };
 		7A74447E1CEE6B5900C70C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447D1CEE6B5900C70C83 /* Main.storyboard */; };
+		F85AB5CA1E1DECCA0076104D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85AB5C91E1DECCA0076104D /* AboutViewController.m */; };
 		F87AE4FB1E1C821B0022D834 /* UIImage+GrayScale.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE4FA1E1C821B0022D834 /* UIImage+GrayScale.m */; };
 		F87AE4FE1E1C95110022D834 /* Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE4FD1E1C95110022D834 /* Utility.m */; };
 		F87AE5011E1CBF900022D834 /* ResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE5001E1CBF900022D834 /* ResultViewController.m */; };
@@ -63,6 +64,8 @@
 		7A7444791CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPhotoCaptureDelegate.m; sourceTree = "<group>"; };
 		7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A74447D1CEE6B5900C70C83 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F85AB5C91E1DECCA0076104D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		F85AB5CB1E1DECDB0076104D /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		F87AE4FA1E1C821B0022D834 /* UIImage+GrayScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GrayScale.m"; sourceTree = "<group>"; };
 		F87AE4FC1E1C822D0022D834 /* UIImage+GrayScale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+GrayScale.h"; sourceTree = "<group>"; };
 		F87AE4FD1E1C95110022D834 /* Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utility.m; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 			children = (
 				220626821A1E345E00A45150 /* AVCamAppDelegate.h */,
 				220626831A1E345E00A45150 /* AVCamAppDelegate.m */,
+				F85AB5CB1E1DECDB0076104D /* AboutViewController.h */,
+				F85AB5C91E1DECCA0076104D /* AboutViewController.m */,
 				F8BE1BD41E1B451C0028625C /* MainViewContorller.h */,
 				F8BE1BD21E1B450A0028625C /* MainViewContorller.m */,
 				F87AE5061E1CEF840022D834 /* PersonListViewController.m */,
@@ -321,6 +326,7 @@
 				F87AE4FB1E1C821B0022D834 /* UIImage+GrayScale.m in Sources */,
 				F87AE5071E1CEF840022D834 /* PersonListViewController.m in Sources */,
 				F87AE5041E1CE3180022D834 /* PersonInfoViewController.m in Sources */,
+				F85AB5CA1E1DECCA0076104D /* AboutViewController.m in Sources */,
 				2206268A1A1E345E00A45150 /* AVCamCameraViewController.m in Sources */,
 				FDDCC5CB1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m in Sources */,
 				7A74447A1CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m in Sources */,
