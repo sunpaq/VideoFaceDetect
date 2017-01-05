@@ -18,24 +18,26 @@
 - (void)viewDidLoad
 {
     //[self.indicator startAnimating];
-    NSMutableURLRequest* req = [[NSURLRequest requestWithURL:[NSURL URLWithString:END_POINT]
-                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                             timeoutInterval:30] mutableCopy];
-    req.HTTPMethod = GET_METHOD;
-    //req.HTTPBody = @"";
+    AppDelegate* app = [AppDelegate getInstance];
     
-    NSURLConnection* connect = [NSURLConnection connectionWithRequest:req delegate:self];
-    [connect start];
+    //[app fetchPersonList:self WithEndPoint:END_POINT];
+    
+    [app.sdk getPersonIds:app.groupName successBlock:^(id responseObject) {
+        
+        
+    } failureBlock:^(NSError *error) {
+        //
+    }];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@(%ld)", NETWORK_ERR, (long)error.code]
-                                                    message:error.localizedDescription
-                                                   delegate:self
-                                          cancelButtonTitle:GOT_IT
-                                          otherButtonTitles:nil];
-    [alert show];
+    NSString* str = [NSString stringWithFormat:@"%@(%ld)", NETWORK_ERR, (long)error.code];
+    [[[UIAlertView alloc] initWithTitle:str
+                                message:error.localizedDescription
+                               delegate:self
+                      cancelButtonTitle:GOT_IT
+                      otherButtonTitles:nil] show];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -48,18 +50,6 @@
     //AppDelegate* app = [AppDelegate getInstance];
     
     self.persons = [Person getPersonsFromJSONData:data];
-//    for (NSDictionary* person in self.persons) {
-//        
-//        NSNumber* EmployeeId = [person objectForKey:@"EmployeeId"];
-//        NSString* FirstName  = [person objectForKey:@"FirstName"];
-//        NSString* Group      = [person objectForKey:@"Group"];
-//        NSNumber* GroupId    = [person objectForKey:@"GroupId"];
-//        NSNumber* Id         = [person objectForKey:@"Id"];
-//        NSString* LastName   = [person objectForKey:@"LastName"];
-//        NSString* Name       = [person objectForKey:@"Name"];
-//        
-//        [app addPersonName:Name WithId:[Id stringValue] WithTag:LastName];
-//    }
     
     [self.tableView reloadData];
 }

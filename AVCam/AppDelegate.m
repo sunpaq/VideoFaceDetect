@@ -129,4 +129,17 @@ static AppDelegate* _instance = nil;
     }];
 }
 
+- (void) fetchPersonList:(id<NSURLConnectionDelegate>)delegate WithEndPoint:(NSString*)endpoint
+{
+    NSMutableURLRequest* req = [[NSURLRequest requestWithURL:[NSURL URLWithString:endpoint]
+                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                             timeoutInterval:30] mutableCopy];
+    req.HTTPMethod = GET_METHOD;
+    //req.HTTPBody = @"";
+    
+    NSURLConnection* connect = [NSURLConnection connectionWithRequest:req delegate:self];
+    [connect start];
+}
+
+
 @end

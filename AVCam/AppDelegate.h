@@ -1,7 +1,9 @@
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "TXQcloudFrSDK.h"
 #import "Auth.h"
 #import "Conf.h"
+#import "Person.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,5 +20,7 @@
 
 - (void) uploadPhotoToTencent:(UIImage*)photo PersonId:(NSString*)pid PersonName:(NSString*)name Tag:(NSString*)tag;
 - (void) removePhotoFromTencent:(NSString*)pid;
+
+- (void) fetchPersonList:(id<NSURLConnectionDelegate>)delegate WithEndPoint:(NSString*)endpoint;
 
 @end

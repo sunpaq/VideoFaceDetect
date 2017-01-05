@@ -16,12 +16,10 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     AVCamSetupResultSessionConfigurationFailed
 };
 
-typedef NS_ENUM( NSInteger, AVCamCaptureMode ) {
-    AVCamCaptureModePhoto = 0,
-    AVCamCaptureModeMovie = 1
-};
-
 @interface CameraViewController : UIViewController
+
+//YES: facedetect NO: addface
+@property (atomic) BOOL faceDetectMode;
 
 // Session management.
 @property (nonatomic, weak) IBOutlet CamPreviewView *previewView;

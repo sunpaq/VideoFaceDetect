@@ -29,7 +29,47 @@ static void * SessionRunningContext = &SessionRunningContext;
 
 @implementation CameraViewController
 
-#pragma mark View Controller Life Cycle
+//+(instancetype)alloc
+//{
+//    //self=[super alloc];
+//    if (self) {
+//        
+//        return self;
+//    }
+//    return nil;
+//}
+
+- (void) setupDefaults
+{
+    self.faceDetectMode = NO;
+}
+
+- (instancetype)init
+{
+    if (self=[super init]) {
+        [self setupDefaults];
+        return self;
+    }
+    return nil;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self=[super initWithCoder:aDecoder]) {
+        [self setupDefaults];
+        return self;
+    }
+    return nil;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    if (self=[super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        [self setupDefaults];
+        return self;
+    }
+    return nil;
+}
 
 - (void) resultViewClosed
 {
