@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ResultViewController.h"
-#import "AVCamCameraViewController.h"
+#import "CameraViewController.h"
 
 @implementation ResultViewController
 

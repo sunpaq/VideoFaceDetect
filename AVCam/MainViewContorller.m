@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "MainViewContorller.h"
-#import "AVCamAppDelegate.h"
+#import "AppDelegate.h"
 
 @interface MainViewController()
 @property (nonatomic, strong) UIImagePickerController* imagePickerController;
@@ -11,7 +11,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+    AppDelegate* app = [AppDelegate getInstance];
     self.addFaceButton.title = [NSString stringWithFormat:@"加脸入组（%@）", app.groupName];
     
     self.existingPersons.text = [[app.personDatas allKeys] description];
@@ -81,7 +81,7 @@
         self.uploadResultText.text = @"君の名は（你的名字）？";
         return;
     }
-    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+    AppDelegate* app = [AppDelegate getInstance];
     
     [app.sdk newPerson:self.faceImageView.image
               personId:app.lastAssignedPersonId.stringValue
@@ -113,7 +113,7 @@
         self.deletePersonId.text = @"请输入要删除的personId";
         return;
     }
-    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+    AppDelegate* app = [AppDelegate getInstance];
     
     [app.sdk delPerson:self.deletePersonId.text successBlock:^(id responseObject) {
         // delete person success

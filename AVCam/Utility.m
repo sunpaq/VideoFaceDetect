@@ -37,4 +37,9 @@
     return [NSString stringWithCString:[data bytes] encoding:NSUTF8StringEncoding];
 }
 
++ (CGRect) resizeRect:(CGRect)rect ByHWRatio:(CGFloat)ratio
+{
+    return CGRectMake(rect.origin.x, rect.origin.y, rect.size.width, rect.size.width * ratio);
+}
+
 @end

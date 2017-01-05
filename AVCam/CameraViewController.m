@@ -1,6 +1,6 @@
-#import "AVCamCameraViewController.h"
-#import "AVCamVideoCaptureDelegate.h"
-#import "AVCamAppDelegate.h"
+#import "CameraViewController.h"
+#import "VideoCaptureDelegate.h"
+#import "AppDelegate.h"
 #import "UIImage+GrayScale.h"
 #import "ResultViewController.h"
 
@@ -23,11 +23,11 @@ static void * SessionRunningContext = &SessionRunningContext;
 
 @end
 
-@interface AVCamCameraViewController ()
-@property (nonatomic, strong) AVCamVideoCaptureDelegate* sampleBufferDelegate;
+@interface CameraViewController ()
+@property (nonatomic, strong) VideoCaptureDelegate* sampleBufferDelegate;
 @end
 
-@implementation AVCamCameraViewController
+@implementation CameraViewController
 
 #pragma mark View Controller Life Cycle
 
@@ -70,7 +70,7 @@ static bool detected = false;
 
 - (void) callDetectFaceAPI:(UIImage*)face
 {
-    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+    AppDelegate* app = [AppDelegate getInstance];
 
     [app.sdk detectFace:face successBlock:^(id responseObject) {
         NSDictionary* dict = (NSDictionary*)responseObject;
@@ -110,7 +110,7 @@ static bool detected = false;
 
 - (void) callIdentifyFaceAPI:(UIImage*)face
 {
-    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+    AppDelegate* app = [AppDelegate getInstance];
 
     [app.sdk faceIdentify:face groupId:app.groupName successBlock:^(id responseObject) {
         //SUCCESS
@@ -153,7 +153,7 @@ static bool detected = false;
         if (self.faceImage) {
             count = 0;
             
-            NSData* pngdata = UIImageJPEGRepresentation(self.faceImage, 1.0);
+            NSData* pngdata = UIImageJPEGRepresentation([self.faceImage convertToGrayscale], 1.0);
             if (pngdata) {
                 NSLog(@"png image size: %lu\n", (unsigned long)[pngdata length]);
             }
@@ -199,15 +199,7 @@ static bool detected = false;
     //full of the view
     self.previewView.frame = self.view.frame;
     
-    self.sampleBufferDelegate = [[AVCamVideoCaptureDelegate alloc] initWithCameraViewController:self];
-    //self.faceFrame.hidden = YES;
-	
-	// Disable UI. The UI is enabled if and only if the session starts running.
-	self.cameraButton.enabled = NO;
-	self.recordButton.enabled = NO;
-	self.photoButton.enabled = NO;
-	//self.livePhotoModeButton.enabled = NO;
-	self.captureModeControl.enabled = NO;
+    self.sampleBufferDelegate = [[VideoCaptureDelegate alloc] initWithCameraViewController:self];
 	
 	// Create the AVCaptureSession.
 	self.session = [[AVCaptureSession alloc] init];
@@ -360,7 +352,6 @@ static bool detected = false;
 
 #pragma mark Session Management
 
-
 // Call this on the session queue.
 - (void)configureSession
 {
@@ -484,186 +475,7 @@ static bool detected = false;
 	[self.session commitConfiguration];
 }
 
-- (IBAction)resumeInterruptedSession:(id)sender
-{
-	dispatch_async( self.sessionQueue, ^{
-		/*
-			The session might fail to start running, e.g., if a phone or FaceTime call is still
-			using audio or video. A failure to start the session running will be communicated via
-			a session runtime error notification. To avoid repeatedly failing to start the session
-			running, we only try to restart the session running in the session runtime error handler
-			if we aren't trying to resume the session running.
-		*/
-		[self.session startRunning];
-		self.sessionRunning = self.session.isRunning;
-		if ( ! self.session.isRunning ) {
-			dispatch_async( dispatch_get_main_queue(), ^{
-				NSString *message = NSLocalizedString( @"Unable to resume", @"Alert message when unable to resume the session running" );
-				UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"AVCam" message:message preferredStyle:UIAlertControllerStyleAlert];
-				UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString( @"OK", @"Alert OK button" ) style:UIAlertActionStyleCancel handler:nil];
-				[alertController addAction:cancelAction];
-				[self presentViewController:alertController animated:YES completion:nil];
-			} );
-		}
-		else {
-			dispatch_async( dispatch_get_main_queue(), ^{
-				self.resumeButton.hidden = YES;
-			} );
-		}
-	} );
-}
-
-- (IBAction)toggleCaptureMode:(UISegmentedControl *)captureModeControl
-{
-	if ( captureModeControl.selectedSegmentIndex == AVCamCaptureModePhoto ) {
-		self.recordButton.enabled = NO;
-		
-		dispatch_async( self.sessionQueue, ^{
-			/*
-				Remove the AVCaptureMovieFileOutput from the session because movie recording is
-				not supported with AVCaptureSessionPresetPhoto. Additionally, Live Photo
-				capture is not supported when an AVCaptureMovieFileOutput is connected to the session.
-			*/
-			[self.session beginConfiguration];
-			[self.session removeOutput:self.movieFileOutput];
-			self.session.sessionPreset = AVCaptureSessionPresetPhoto;
-			[self.session commitConfiguration];
-			
-			self.movieFileOutput = nil;
-			
-			if ( self.photoOutput.livePhotoCaptureSupported ) {
-				self.photoOutput.livePhotoCaptureEnabled = YES;
-				
-//				dispatch_async( dispatch_get_main_queue(), ^{
-//					self.livePhotoModeButton.enabled = YES;
-//					self.livePhotoModeButton.hidden = NO;
-//				} );
-			}
-		} );
-	}
-	else if ( captureModeControl.selectedSegmentIndex == AVCamCaptureModeMovie ) {
-		//self.livePhotoModeButton.hidden = YES;
-		
-		dispatch_async( self.sessionQueue, ^{
-			AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-			
-			if ( [self.session canAddOutput:movieFileOutput] )
-			{
-				[self.session beginConfiguration];
-				[self.session addOutput:movieFileOutput];
-				self.session.sessionPreset = AVCaptureSessionPresetHigh;
-				AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-				if ( connection.isVideoStabilizationSupported ) {
-					connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
-				}
-				[self.session commitConfiguration];
-				
-				self.movieFileOutput = movieFileOutput;
-				
-				dispatch_async( dispatch_get_main_queue(), ^{
-					self.recordButton.enabled = YES;
-				} );
-			}
-		} );
-	}
-}
-
 #pragma mark Device Configuration
-
-- (IBAction)changeCamera:(id)sender
-{
-	self.cameraButton.enabled = NO;
-	self.recordButton.enabled = NO;
-	self.photoButton.enabled = NO;
-	//self.livePhotoModeButton.enabled = NO;
-	self.captureModeControl.enabled = NO;
-	
-	dispatch_async( self.sessionQueue, ^{
-		AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
-		AVCaptureDevicePosition currentPosition = currentVideoDevice.position;
-		
-		AVCaptureDevicePosition preferredPosition;
-		AVCaptureDeviceType preferredDeviceType;
-		
-		switch ( currentPosition )
-		{
-			case AVCaptureDevicePositionUnspecified:
-			case AVCaptureDevicePositionFront:
-				preferredPosition = AVCaptureDevicePositionBack;
-				preferredDeviceType = AVCaptureDeviceTypeBuiltInDuoCamera;
-				break;
-			case AVCaptureDevicePositionBack:
-				preferredPosition = AVCaptureDevicePositionFront;
-				preferredDeviceType = AVCaptureDeviceTypeBuiltInWideAngleCamera;
-				break;
-		}
-		
-		NSArray<AVCaptureDevice *> *devices = self.videoDeviceDiscoverySession.devices;
-		AVCaptureDevice *newVideoDevice = nil;
-		
-		// First, look for a device with both the preferred position and device type.
-		for ( AVCaptureDevice *device in devices ) {
-			if ( device.position == preferredPosition && [device.deviceType isEqualToString:preferredDeviceType] ) {
-				newVideoDevice = device;
-				break;
-			}
-		}
-		
-		// Otherwise, look for a device with only the preferred position.
-		if ( ! newVideoDevice ) {
-			for ( AVCaptureDevice *device in devices ) {
-				if ( device.position == preferredPosition ) {
-					newVideoDevice = device;
-					break;
-				}
-			}
-		}
-		
-		if ( newVideoDevice ) {
-			AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:newVideoDevice error:NULL];
-			
-			[self.session beginConfiguration];
-			
-			// Remove the existing device input first, since using the front and back camera simultaneously is not supported.
-			[self.session removeInput:self.videoDeviceInput];
-			
-			if ( [self.session canAddInput:videoDeviceInput] ) {
-				[[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
-				
-				[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:newVideoDevice];
-				
-				[self.session addInput:videoDeviceInput];
-				self.videoDeviceInput = videoDeviceInput;
-			}
-			else {
-				[self.session addInput:self.videoDeviceInput];
-			}
-			
-			AVCaptureConnection *movieFileOutputConnection = [self.movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-			if ( movieFileOutputConnection.isVideoStabilizationSupported ) {
-				movieFileOutputConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
-			}
-			
-			/*
-				Set Live Photo capture enabled if it is supported. When changing cameras, the
-				`livePhotoCaptureEnabled` property of the AVCapturePhotoOutput gets set to NO when
-				a video device is disconnected from the session. After the new video device is
-				added to the session, re-enable Live Photo capture on the AVCapturePhotoOutput if it is supported.
-			 */
-			self.photoOutput.livePhotoCaptureEnabled = self.photoOutput.livePhotoCaptureSupported;
-			
-			[self.session commitConfiguration];
-		}
-		
-		dispatch_async( dispatch_get_main_queue(), ^{
-			self.cameraButton.enabled = YES;
-			self.recordButton.enabled = self.captureModeControl.selectedSegmentIndex == AVCamCaptureModeMovie;
-			self.photoButton.enabled = YES;
-			//self.livePhotoModeButton.enabled = YES;
-			self.captureModeControl.enabled = YES;
-		} );
-	} );
-}
 
 - (IBAction)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer
 {
@@ -700,109 +512,6 @@ static bool detected = false;
 	} );
 }
 
-#pragma mark Capturing Photos
-
-- (IBAction)capturePhoto:(id)sender
-{
-	/*
-		Retrieve the video preview layer's video orientation on the main queue before
-		entering the session queue. We do this to ensure UI elements are accessed on
-		the main thread and session configuration is done on the session queue.
-	*/
-	AVCaptureVideoOrientation videoPreviewLayerVideoOrientation = self.previewView.videoPreviewLayer.connection.videoOrientation;
-
-	dispatch_async( self.sessionQueue, ^{
-		
-		// Update the photo output's connection to match the video orientation of the video preview layer.
-		AVCaptureConnection *photoOutputConnection = [self.photoOutput connectionWithMediaType:AVMediaTypeVideo];
-		photoOutputConnection.videoOrientation = videoPreviewLayerVideoOrientation;
-		
-		// Capture a JPEG photo with flash set to auto and high resolution photo enabled.
-		AVCapturePhotoSettings *photoSettings = [AVCapturePhotoSettings photoSettings];
-		photoSettings.flashMode = AVCaptureFlashModeAuto;
-		photoSettings.highResolutionPhotoEnabled = YES;
-		if ( photoSettings.availablePreviewPhotoPixelFormatTypes.count > 0 ) {
-			photoSettings.previewPhotoFormat = @{ (NSString *)kCVPixelBufferPixelFormatTypeKey : photoSettings.availablePreviewPhotoPixelFormatTypes.firstObject };
-		}
-		
-		// Use a separate object for the photo capture delegate to isolate each capture life cycle.
-		AVCamPhotoCaptureDelegate *photoCaptureDelegate = [[AVCamPhotoCaptureDelegate alloc] initWithRequestedPhotoSettings:photoSettings willCapturePhotoAnimation:^{
-			dispatch_async( dispatch_get_main_queue(), ^{
-				self.previewView.videoPreviewLayer.opacity = 0.0;
-				[UIView animateWithDuration:0.25 animations:^{
-					self.previewView.videoPreviewLayer.opacity = 1.0;
-				}];
-			} );
-		} capturingLivePhoto:^( BOOL capturing ) {
-			/*
-				Because Live Photo captures can overlap, we need to keep track of the
-				number of in progress Live Photo captures to ensure that the
-				Live Photo label stays visible during these captures.
-			*/
-		} completed:^( AVCamPhotoCaptureDelegate *photoCaptureDelegate ) {
-			// When the capture is complete, remove a reference to the photo capture delegate so it can be deallocated.
-		}];
-		
-		/*
-			The Photo Output keeps a weak reference to the photo capture delegate so
-			we store it in an array to maintain a strong reference to this object
-			until the capture is completed.
-		*/
-		[self.photoOutput capturePhotoWithSettings:photoSettings delegate:photoCaptureDelegate];
-	} );
-}
-
-#pragma mark Recording Movies
-
-- (IBAction)toggleMovieRecording:(id)sender
-{
-	/*
-		Disable the Camera button until recording finishes, and disable
-		the Record button until recording starts or finishes.
-		
-		See the AVCaptureFileOutputRecordingDelegate methods.
-	 */
-	self.cameraButton.enabled = NO;
-	self.recordButton.enabled = NO;
-	self.captureModeControl.enabled = NO;
-	
-	/*
-		Retrieve the video preview layer's video orientation on the main queue
-		before entering the session queue. We do this to ensure UI elements are
-		accessed on the main thread and session configuration is done on the session queue.
-	*/
-	AVCaptureVideoOrientation videoPreviewLayerVideoOrientation = self.previewView.videoPreviewLayer.connection.videoOrientation;
-	
-	dispatch_async( self.sessionQueue, ^{
-		if ( ! self.movieFileOutput.isRecording ) {
-			if ( [UIDevice currentDevice].isMultitaskingSupported ) {
-				/*
-					Setup background task.
-					This is needed because the -[captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:]
-					callback is not received until AVCam returns to the foreground unless you request background execution time.
-					This also ensures that there will be time to write the file to the photo library when AVCam is backgrounded.
-					To conclude this background execution, -[endBackgroundTask:] is called in
-					-[captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error:] after the recorded file has been saved.
-				*/
-				self.backgroundRecordingID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
-			}
-			
-			// Update the orientation on the movie file output video connection before starting recording.
-			AVCaptureConnection *movieFileOutputConnection = [self.movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-			movieFileOutputConnection.videoOrientation = videoPreviewLayerVideoOrientation;
-			
-			// Start recording to a temporary file.
-			NSString *outputFileName = [NSUUID UUID].UUIDString;
-			NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[outputFileName stringByAppendingPathExtension:@"mov"]];
-            
-			[self.movieFileOutput startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self.sampleBufferDelegate];
-		}
-		else {
-			[self.movieFileOutput stopRecording];
-		}
-	} );
-}
-
 #pragma mark KVO and Notifications
 
 - (void)addObservers
@@ -834,17 +543,9 @@ static bool detected = false;
 {
 	if ( context == SessionRunningContext ) {
 		BOOL isSessionRunning = [change[NSKeyValueChangeNewKey] boolValue];
-		//BOOL livePhotoCaptureSupported = self.photoOutput.livePhotoCaptureSupported;
-		//BOOL livePhotoCaptureEnabled = self.photoOutput.livePhotoCaptureEnabled;
 		
 		dispatch_async( dispatch_get_main_queue(), ^{
 			// Only enable the ability to change camera if the device has more than one camera.
-			self.cameraButton.enabled = isSessionRunning && ( self.videoDeviceDiscoverySession.uniqueDevicePositionsCount > 1 );
-			self.recordButton.enabled = isSessionRunning && ( self.captureModeControl.selectedSegmentIndex == AVCamCaptureModeMovie );
-			self.photoButton.enabled = isSessionRunning;
-			self.captureModeControl.enabled = isSessionRunning;
-			//self.livePhotoModeButton.enabled = isSessionRunning && livePhotoCaptureEnabled;
-			//self.livePhotoModeButton.hidden = ! ( isSessionRunning && livePhotoCaptureSupported );
 		} );
 	}
 	else {
@@ -876,13 +577,13 @@ static bool detected = false;
 			}
 			else {
 				dispatch_async( dispatch_get_main_queue(), ^{
-					self.resumeButton.hidden = NO;
+					//self.resumeButton.hidden = NO;
 				} );
 			}
 		} );
 	}
 	else {
-		self.resumeButton.hidden = NO;
+		//self.resumeButton.hidden = NO;
 	}
 }
 
@@ -907,41 +608,16 @@ static bool detected = false;
 	}
 	else if ( reason == AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps ) {
 		// Simply fade-in a label to inform the user that the camera is unavailable.
-		self.cameraUnavailableLabel.alpha = 0.0;
-		self.cameraUnavailableLabel.hidden = NO;
-		[UIView animateWithDuration:0.25 animations:^{
-			self.cameraUnavailableLabel.alpha = 1.0;
-		}];
 	}
 	
 	if ( showResumeButton ) {
 		// Simply fade-in a button to enable the user to try to resume the session running.
-		self.resumeButton.alpha = 0.0;
-		self.resumeButton.hidden = NO;
-		[UIView animateWithDuration:0.25 animations:^{
-			self.resumeButton.alpha = 1.0;
-		}];
 	}
 }
 
 - (void)sessionInterruptionEnded:(NSNotification *)notification
 {
 	NSLog( @"Capture session interruption ended" );
-	
-	if ( ! self.resumeButton.hidden ) {
-		[UIView animateWithDuration:0.25 animations:^{
-			self.resumeButton.alpha = 0.0;
-		} completion:^( BOOL finished ) {
-			self.resumeButton.hidden = YES;
-		}];
-	}
-	if ( ! self.cameraUnavailableLabel.hidden ) {
-		[UIView animateWithDuration:0.25 animations:^{
-			self.cameraUnavailableLabel.alpha = 0.0;
-		} completion:^( BOOL finished ) {
-			self.cameraUnavailableLabel.hidden = YES;
-		}];
-	}
 }
 
 @end

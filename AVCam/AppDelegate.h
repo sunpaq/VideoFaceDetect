@@ -3,7 +3,7 @@
 #import "Auth.h"
 #import "Conf.h"
 
-@interface AVCamAppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic) UIWindow *window;
 @property (nonatomic, strong) TXQcloudFrSDK *sdk;
@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSDictionary* personDatas;
 
-+ (AVCamAppDelegate*) getInstance;
++ (AppDelegate*) getInstance;
 - (void) addPersonName:(NSString*)name WithId:(NSString*)pid WithTag:(NSString*)tag;
 - (NSString*) getPersonNameFromId:(NSString*)personId;
 

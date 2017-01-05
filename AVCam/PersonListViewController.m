@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "PersonListViewController.h"
-#import "AVCamAppDelegate.h"
+#import "AppDelegate.h"
 
 #define END_POINT @"http://eccwcl32138.global.schindler.com/FaceManagerService/api/Persons"
 #define GET_METHOD @"GET"
@@ -44,7 +44,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    AVCamAppDelegate* app = [AVCamAppDelegate getInstance];
+    AppDelegate* app = [AppDelegate getInstance];
     
     NSError* jsonerr;
     self.persons = [NSJSONSerialization JSONObjectWithData:data

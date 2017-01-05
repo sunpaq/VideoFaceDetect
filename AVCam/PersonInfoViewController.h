@@ -13,6 +13,8 @@
 
 @interface PersonInfoViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *addFaceButton;
+@property (weak, nonatomic) IBOutlet UIImageView *faceView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 @end

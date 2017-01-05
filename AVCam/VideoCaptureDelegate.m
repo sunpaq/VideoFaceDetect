@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreImage/CoreImage.h>
 #import <CoreGraphics/CoreGraphics.h>
-#import "AVCamVideoCaptureDelegate.h"
+#import "VideoCaptureDelegate.h"
 #import "UIImage+GrayScale.h"
 #import "Utility.h"
 
-@interface AVCamVideoCaptureDelegate ()
+@interface VideoCaptureDelegate ()
 {
     CGRect _frame;
     CGRect _scaleFrame;
@@ -14,12 +14,12 @@
 @property (nonatomic, strong) CIDetector* faceDetector;
 @end
 
-@implementation AVCamVideoCaptureDelegate : NSObject
+@implementation VideoCaptureDelegate : NSObject
 
 @synthesize camviewController;
 
 //CIDetectorImageOrientation
-- (instancetype) initWithCameraViewController:(AVCamCameraViewController*)cvc
+- (instancetype) initWithCameraViewController:(CameraViewController*)cvc
 {
     if ([super init]) {
         self.cicontext = [CIContext context];
@@ -88,9 +88,11 @@
     }
     
     if (cimage) {
-        CGImageRef facecrop = [self.cicontext createCGImage:cimage fromRect:_frame];
+        CGRect rect4to3 = [Utility resizeRect:_frame ByHWRatio:(CGFloat)4/3];
+        CGImageRef facecrop = [self.cicontext createCGImage:cimage
+                                                   fromRect:rect4to3];
         UIImage* face = [UIImage imageWithCGImage:facecrop];
-        self.camviewController.faceImage = [face convertToGrayscale];
+        self.camviewController.faceImage = face;
     }
     
     CGRect scaleRect = [Utility scaleRectOfBigSize:uimage.size BySmallRect:_frame];
@@ -102,10 +104,6 @@
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections
 {
     // Enable the Record button to let the user stop the recording.
-    dispatch_async( dispatch_get_main_queue(), ^{
-        camviewController.recordButton.enabled = YES;
-        [camviewController.recordButton setTitle:NSLocalizedString( @"Stop", @"Recording button stop title" ) forState:UIControlStateNormal];
-    });
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
@@ -166,13 +164,6 @@
     }
     
     // Enable the Camera and Record buttons to let the user switch camera and start another recording.
-    dispatch_async( dispatch_get_main_queue(), ^{
-        // Only enable the ability to change camera if the device has more than one camera.
-        camviewController.cameraButton.enabled = ( camviewController.videoDeviceDiscoverySession.uniqueDevicePositionsCount > 1 );
-        camviewController.recordButton.enabled = YES;
-        camviewController.captureModeControl.enabled = YES;
-        [camviewController.recordButton setTitle:NSLocalizedString( @"Record", @"Recording button record title" ) forState:UIControlStateNormal];
-    });
 }
 
 

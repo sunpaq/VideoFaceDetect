@@ -1,11 +1,11 @@
 #import <AVFoundation/AVFoundation.h>
-#import "AVCamPreviewView.h"
+#import "CamPreviewView.h"
 
-@interface AVCamPreviewView()
+@interface CamPreviewView()
 //@property (nonatomic, strong) CALayer* hudLayer;
 @end
 
-@implementation AVCamPreviewView
+@implementation CamPreviewView
 
 + (Class)layerClass
 {

@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		2206265F1A1E330400A45150 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2206265E1A1E330400A45150 /* main.m */; };
-		220626881A1E345E00A45150 /* AVCamAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 220626831A1E345E00A45150 /* AVCamAppDelegate.m */; };
-		220626891A1E345E00A45150 /* AVCamPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 220626851A1E345E00A45150 /* AVCamPreviewView.m */; };
-		2206268A1A1E345E00A45150 /* AVCamCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 220626871A1E345E00A45150 /* AVCamCameraViewController.m */; };
+		220626881A1E345E00A45150 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 220626831A1E345E00A45150 /* AppDelegate.m */; };
+		220626891A1E345E00A45150 /* CamPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 220626851A1E345E00A45150 /* CamPreviewView.m */; };
+		2206268A1A1E345E00A45150 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 220626871A1E345E00A45150 /* CameraViewController.m */; };
 		22CA31B81B022D1300D2DE70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22CA31B61B022D1300D2DE70 /* LaunchScreen.storyboard */; };
-		7A74447A1CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7444791CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m */; };
+		7A74447A1CEE6B0F00C70C83 /* PhotoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7444791CEE6B0F00C70C83 /* PhotoCaptureDelegate.m */; };
 		7A74447C1CEE6B4B00C70C83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */; };
 		7A74447E1CEE6B5900C70C83 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A74447D1CEE6B5900C70C83 /* Main.storyboard */; };
 		F85AB5CA1E1DECCA0076104D /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F85AB5C91E1DECCA0076104D /* AboutViewController.m */; };
@@ -22,7 +22,7 @@
 		F87AE5041E1CE3180022D834 /* PersonInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE5031E1CE3180022D834 /* PersonInfoViewController.m */; };
 		F87AE5071E1CEF840022D834 /* PersonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F87AE5061E1CEF840022D834 /* PersonListViewController.m */; };
 		F8BE1BD31E1B450A0028625C /* MainViewContorller.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BE1BD21E1B450A0028625C /* MainViewContorller.m */; };
-		FDDCC5CB1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5CA1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m */; };
+		FDDCC5CB1E17A568007A13B1 /* VideoCaptureDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5CA1E17A568007A13B1 /* VideoCaptureDelegate.m */; };
 		FDDCC5E81E18291C007A13B1 /* Auth.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5E01E18291C007A13B1 /* Auth.m */; };
 		FDDCC5E91E18291C007A13B1 /* Conf.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5E21E18291C007A13B1 /* Conf.m */; };
 		FDDCC5EA1E18291C007A13B1 /* TXQcloudFrSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = FDDCC5E41E18291C007A13B1 /* TXQcloudFrSDK.m */; };
@@ -53,15 +53,15 @@
 		220626591A1E330400A45150 /* AVCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2206265D1A1E330400A45150 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2206265E1A1E330400A45150 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		220626821A1E345E00A45150 /* AVCamAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamAppDelegate.h; sourceTree = "<group>"; };
-		220626831A1E345E00A45150 /* AVCamAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamAppDelegate.m; sourceTree = "<group>"; };
-		220626841A1E345E00A45150 /* AVCamPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamPreviewView.h; sourceTree = "<group>"; };
-		220626851A1E345E00A45150 /* AVCamPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPreviewView.m; sourceTree = "<group>"; };
-		220626861A1E345E00A45150 /* AVCamCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamCameraViewController.h; sourceTree = "<group>"; };
-		220626871A1E345E00A45150 /* AVCamCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamCameraViewController.m; sourceTree = "<group>"; };
+		220626821A1E345E00A45150 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		220626831A1E345E00A45150 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		220626841A1E345E00A45150 /* CamPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CamPreviewView.h; sourceTree = "<group>"; };
+		220626851A1E345E00A45150 /* CamPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CamPreviewView.m; sourceTree = "<group>"; };
+		220626861A1E345E00A45150 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		220626871A1E345E00A45150 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		22CA31B71B022D1300D2DE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = AVCam/Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		7A7444781CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamPhotoCaptureDelegate.h; sourceTree = "<group>"; };
-		7A7444791CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamPhotoCaptureDelegate.m; sourceTree = "<group>"; };
+		7A7444781CEE6B0F00C70C83 /* PhotoCaptureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCaptureDelegate.h; sourceTree = "<group>"; };
+		7A7444791CEE6B0F00C70C83 /* PhotoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCaptureDelegate.m; sourceTree = "<group>"; };
 		7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A74447D1CEE6B5900C70C83 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F85AB5C91E1DECCA0076104D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -78,8 +78,8 @@
 		F87AE5081E1CEF910022D834 /* PersonListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonListViewController.h; sourceTree = "<group>"; };
 		F8BE1BD21E1B450A0028625C /* MainViewContorller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewContorller.m; sourceTree = "<group>"; };
 		F8BE1BD41E1B451C0028625C /* MainViewContorller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewContorller.h; sourceTree = "<group>"; };
-		FDDCC5CA1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCamVideoCaptureDelegate.m; sourceTree = "<group>"; };
-		FDDCC5CC1E17A593007A13B1 /* AVCamVideoCaptureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCamVideoCaptureDelegate.h; sourceTree = "<group>"; };
+		FDDCC5CA1E17A568007A13B1 /* VideoCaptureDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCaptureDelegate.m; sourceTree = "<group>"; };
+		FDDCC5CC1E17A593007A13B1 /* VideoCaptureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCaptureDelegate.h; sourceTree = "<group>"; };
 		FDDCC5DF1E18291C007A13B1 /* Auth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Auth.h; sourceTree = "<group>"; };
 		FDDCC5E01E18291C007A13B1 /* Auth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Auth.m; sourceTree = "<group>"; };
 		FDDCC5E11E18291C007A13B1 /* Conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Conf.h; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 		2206265B1A1E330400A45150 /* AVCam */ = {
 			isa = PBXGroup;
 			children = (
-				220626821A1E345E00A45150 /* AVCamAppDelegate.h */,
-				220626831A1E345E00A45150 /* AVCamAppDelegate.m */,
+				220626821A1E345E00A45150 /* AppDelegate.h */,
+				220626831A1E345E00A45150 /* AppDelegate.m */,
 				F85AB5CB1E1DECDB0076104D /* AboutViewController.h */,
 				F85AB5C91E1DECCA0076104D /* AboutViewController.m */,
 				F8BE1BD41E1B451C0028625C /* MainViewContorller.h */,
@@ -152,16 +152,16 @@
 				F87AE5081E1CEF910022D834 /* PersonListViewController.h */,
 				F87AE5051E1CE32D0022D834 /* PersonInfoViewController.h */,
 				F87AE5031E1CE3180022D834 /* PersonInfoViewController.m */,
-				220626841A1E345E00A45150 /* AVCamPreviewView.h */,
-				220626851A1E345E00A45150 /* AVCamPreviewView.m */,
+				220626841A1E345E00A45150 /* CamPreviewView.h */,
+				220626851A1E345E00A45150 /* CamPreviewView.m */,
 				F87AE5001E1CBF900022D834 /* ResultViewController.m */,
 				F87AE5021E1CBFA30022D834 /* ResultViewController.h */,
-				220626861A1E345E00A45150 /* AVCamCameraViewController.h */,
-				220626871A1E345E00A45150 /* AVCamCameraViewController.m */,
-				7A7444781CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.h */,
-				7A7444791CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m */,
-				FDDCC5CC1E17A593007A13B1 /* AVCamVideoCaptureDelegate.h */,
-				FDDCC5CA1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m */,
+				220626861A1E345E00A45150 /* CameraViewController.h */,
+				220626871A1E345E00A45150 /* CameraViewController.m */,
+				7A7444781CEE6B0F00C70C83 /* PhotoCaptureDelegate.h */,
+				7A7444791CEE6B0F00C70C83 /* PhotoCaptureDelegate.m */,
+				FDDCC5CC1E17A593007A13B1 /* VideoCaptureDelegate.h */,
+				FDDCC5CA1E17A568007A13B1 /* VideoCaptureDelegate.m */,
 				7A74447D1CEE6B5900C70C83 /* Main.storyboard */,
 				7A74447B1CEE6B4B00C70C83 /* Assets.xcassets */,
 				22CA31B61B022D1300D2DE70 /* LaunchScreen.storyboard */,
@@ -317,19 +317,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				220626881A1E345E00A45150 /* AVCamAppDelegate.m in Sources */,
+				220626881A1E345E00A45150 /* AppDelegate.m in Sources */,
 				F87AE5011E1CBF900022D834 /* ResultViewController.m in Sources */,
 				2206265F1A1E330400A45150 /* main.m in Sources */,
-				220626891A1E345E00A45150 /* AVCamPreviewView.m in Sources */,
+				220626891A1E345E00A45150 /* CamPreviewView.m in Sources */,
 				FDDCC5E81E18291C007A13B1 /* Auth.m in Sources */,
 				F8BE1BD31E1B450A0028625C /* MainViewContorller.m in Sources */,
 				F87AE4FB1E1C821B0022D834 /* UIImage+GrayScale.m in Sources */,
 				F87AE5071E1CEF840022D834 /* PersonListViewController.m in Sources */,
 				F87AE5041E1CE3180022D834 /* PersonInfoViewController.m in Sources */,
 				F85AB5CA1E1DECCA0076104D /* AboutViewController.m in Sources */,
-				2206268A1A1E345E00A45150 /* AVCamCameraViewController.m in Sources */,
-				FDDCC5CB1E17A568007A13B1 /* AVCamVideoCaptureDelegate.m in Sources */,
-				7A74447A1CEE6B0F00C70C83 /* AVCamPhotoCaptureDelegate.m in Sources */,
+				2206268A1A1E345E00A45150 /* CameraViewController.m in Sources */,
+				FDDCC5CB1E17A568007A13B1 /* VideoCaptureDelegate.m in Sources */,
+				7A74447A1CEE6B0F00C70C83 /* PhotoCaptureDelegate.m in Sources */,
 				FDDCC5EB1E18291C007A13B1 /* NSData+Base64.m in Sources */,
 				FDDCC5EA1E18291C007A13B1 /* TXQcloudFrSDK.m in Sources */,
 				FDDCC5E91E18291C007A13B1 /* Conf.m in Sources */,

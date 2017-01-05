@@ -1,13 +1,13 @@
-#import "AVCamAppDelegate.h"
+#import "AppDelegate.h"
 
-static AVCamAppDelegate* _instance = nil;
+static AppDelegate* _instance = nil;
 
 //Private
-@interface AVCamAppDelegate()
+@interface AppDelegate()
 - (void) increasePersonId;
 @end
 
-@implementation AVCamAppDelegate
+@implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
@@ -38,7 +38,7 @@ static AVCamAppDelegate* _instance = nil;
     [defs setObject:self.personDatas forKey:@"personDatas"];
 }
 
-+ (AVCamAppDelegate*) getInstance
++ (AppDelegate*) getInstance
 {
     return _instance;
 }

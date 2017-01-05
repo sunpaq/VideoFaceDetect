@@ -2,7 +2,7 @@
 
 @class AVCaptureSession;
 
-@interface AVCamPreviewView : UIView
+@interface CamPreviewView : UIView
 @property (nonatomic, readonly) AVCaptureVideoPreviewLayer *videoPreviewLayer;
 @property (nonatomic) AVCaptureSession *session;
 @end

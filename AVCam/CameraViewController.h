@@ -1,8 +1,8 @@
 #import <UIKit/UIKit.h>
 #import <Photos/Photos.h>
 #import <AVFoundation/AVFoundation.h>
-#import "AVCamPreviewView.h"
-#import "AVCamPhotoCaptureDelegate.h"
+#import "CamPreviewView.h"
+#import "PhotoCaptureDelegate.h"
 
 @interface AVCaptureDeviceDiscoverySession (Utilities)
 
@@ -21,11 +21,10 @@ typedef NS_ENUM( NSInteger, AVCamCaptureMode ) {
     AVCamCaptureModeMovie = 1
 };
 
-@interface AVCamCameraViewController : UIViewController
+@interface CameraViewController : UIViewController
 
 // Session management.
-@property (nonatomic, weak) IBOutlet AVCamPreviewView *previewView;
-@property (nonatomic, weak) IBOutlet UISegmentedControl *captureModeControl;
+@property (nonatomic, weak) IBOutlet CamPreviewView *previewView;
 
 @property (nonatomic) AVCamSetupResult setupResult;
 @property (nonatomic) dispatch_queue_t sessionQueue;
@@ -34,17 +33,10 @@ typedef NS_ENUM( NSInteger, AVCamCaptureMode ) {
 @property (nonatomic) AVCaptureDeviceInput *videoDeviceInput;
 
 // Device configuration.
-@property (nonatomic, weak) IBOutlet UIButton *cameraButton;
-@property (nonatomic, weak) IBOutlet UILabel *cameraUnavailableLabel;
 @property (nonatomic) AVCaptureDeviceDiscoverySession *videoDeviceDiscoverySession;
 
 // Capturing photos.
-@property (nonatomic, weak) IBOutlet UIButton *photoButton;
 @property (nonatomic) AVCapturePhotoOutput *photoOutput;
-
-// Recording movies.
-@property (nonatomic, weak) IBOutlet UIButton *recordButton;
-@property (nonatomic, weak) IBOutlet UIButton *resumeButton;
 
 @property (nonatomic, strong) AVCaptureMovieFileOutput *movieFileOutput;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;

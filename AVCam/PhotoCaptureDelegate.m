@@ -1,21 +1,21 @@
 #import <Photos/Photos.h>
-#import "AVCamPhotoCaptureDelegate.h"
+#import "PhotoCaptureDelegate.h"
 
-@interface AVCamPhotoCaptureDelegate ()
+@interface PhotoCaptureDelegate ()
 
 @property (nonatomic, readwrite) AVCapturePhotoSettings *requestedPhotoSettings;
 @property (nonatomic) void (^willCapturePhotoAnimation)();
 @property (nonatomic) void (^capturingLivePhoto)(BOOL capturing);
-@property (nonatomic) void (^completed)(AVCamPhotoCaptureDelegate *photoCaptureDelegate);
+@property (nonatomic) void (^completed)(PhotoCaptureDelegate *photoCaptureDelegate);
 
 @property (nonatomic) NSData *photoData;
 @property (nonatomic) NSURL *livePhotoCompanionMovieURL;
 
 @end
 
-@implementation AVCamPhotoCaptureDelegate
+@implementation PhotoCaptureDelegate
 
-- (instancetype)initWithRequestedPhotoSettings:(AVCapturePhotoSettings *)requestedPhotoSettings willCapturePhotoAnimation:(void (^)())willCapturePhotoAnimation capturingLivePhoto:(void (^)(BOOL))capturingLivePhoto completed:(void (^)(AVCamPhotoCaptureDelegate *))completed
+- (instancetype)initWithRequestedPhotoSettings:(AVCapturePhotoSettings *)requestedPhotoSettings willCapturePhotoAnimation:(void (^)())willCapturePhotoAnimation capturingLivePhoto:(void (^)(BOOL))capturingLivePhoto completed:(void (^)(PhotoCaptureDelegate *))completed
 {
 	self = [super init];
 	if ( self ) {
