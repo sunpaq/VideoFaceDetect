@@ -26,9 +26,14 @@
 
 - (void) onItemSelected:(Person*)person AtRow:(NSInteger)row
 {
-    self.personIdLabel.text = [person.Id stringValue];
-    self.personNameLabel.text = person.Name;
-    self.personNumberLabel.text = [person.EmployeeId stringValue];
+    self.personIdText.text = [person.Id stringValue];
+    self.groupIdText.text  = [person.GroupId stringValue];
+    self.groupNameText.text  = person.Group;
+    self.employeeIdText.text = person.EmployeeId;
+    self.nameText.text       = person.Name;
+    self.lastNameText.text   = person.LastName;
+    self.firstNameText.text  = person.FirstName;
+    
 }
 
 @end

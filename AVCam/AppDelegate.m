@@ -137,7 +137,7 @@ static AppDelegate* _instance = nil;
     req.HTTPMethod = GET_METHOD;
     //req.HTTPBody = @"";
     
-    NSURLConnection* connect = [NSURLConnection connectionWithRequest:req delegate:self];
+    NSURLConnection* connect = [NSURLConnection connectionWithRequest:req delegate:delegate];
     [connect start];
 }
 

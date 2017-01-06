@@ -13,7 +13,7 @@
 
 @property (nonatomic, strong) UIImage* faceImage;
 
-@property (nonatomic, strong) NSNumber* EmployeeId;
+@property (nonatomic, strong) NSString* EmployeeId;
 @property (nonatomic, strong) NSString* FirstName;
 @property (nonatomic, strong) NSString* Group;
 @property (nonatomic, strong) NSNumber* GroupId;

@@ -22,7 +22,7 @@
 
     if (masterNav && detailNav) {
         PersonListViewController* master = masterNav.viewControllers.firstObject;
-        PersonInfoViewController* detail = masterNav.viewControllers.firstObject;
+        PersonInfoViewController* detail = detailNav.viewControllers.firstObject;
 
         if (master && detail) {
             master.itemSelectDelegate = detail;

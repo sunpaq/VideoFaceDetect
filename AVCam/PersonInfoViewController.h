@@ -19,10 +19,13 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 
-@property (weak, nonatomic) IBOutlet UILabel *personIdLabel;
-@property (weak, nonatomic) IBOutlet UILabel *personNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *personNumberLabel;
-
+@property (weak, nonatomic) IBOutlet UITextField *personIdText;
+@property (weak, nonatomic) IBOutlet UITextField *groupIdText;
+@property (weak, nonatomic) IBOutlet UITextField *groupNameText;
+@property (weak, nonatomic) IBOutlet UITextField *employeeIdText;
+@property (weak, nonatomic) IBOutlet UITextField *nameText;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameText;
+@property (weak, nonatomic) IBOutlet UITextField *firstNameText;
 
 @end
 

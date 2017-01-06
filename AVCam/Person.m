@@ -5,7 +5,7 @@
 
 - (Person*) loadJSONObject:(NSDictionary*)dict
 {
-    NSNumber* EmployeeId = [dict objectForKey:@"EmployeeId"];
+    NSString* EmployeeId = [dict objectForKey:@"EmployeeId"];
     NSString* FirstName  = [dict objectForKey:@"FirstName"];
     NSString* Group      = [dict objectForKey:@"Group"];
     NSNumber* GroupId    = [dict objectForKey:@"GroupId"];

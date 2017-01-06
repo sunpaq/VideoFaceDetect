@@ -20,14 +20,15 @@
     //[self.indicator startAnimating];
     AppDelegate* app = [AppDelegate getInstance];
     
-    //[app fetchPersonList:self WithEndPoint:END_POINT];
+    [app fetchPersonList:self WithEndPoint:END_POINT];
     
+    /*
     [app.sdk getPersonIds:app.groupName successBlock:^(id responseObject) {
-        
         
     } failureBlock:^(NSError *error) {
         //
     }];
+     */
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
