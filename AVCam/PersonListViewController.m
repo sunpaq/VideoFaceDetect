@@ -10,7 +10,6 @@
 #define GOT_IT @"知道了"
 
 @interface PersonListViewController ()
-@property (nonatomic) NSArray* persons;
 @end
 
 @implementation PersonListViewController
@@ -20,7 +19,9 @@
     //[self.indicator startAnimating];
     AppDelegate* app = [AppDelegate getInstance];
     
-    [app fetchPersonList:self WithEndPoint:END_POINT];
+    //[app fetchPersonList:self WithEndPoint:END_POINT];
+    app.persons = [Person dummyPersons];
+
     
     /*
     [app.sdk getPersonIds:app.groupName successBlock:^(id responseObject) {
@@ -39,6 +40,10 @@
                                delegate:self
                       cancelButtonTitle:GOT_IT
                       otherButtonTitles:nil] show];
+    
+    AppDelegate* app = [AppDelegate getInstance];
+    app.persons = [Person dummyPersons];
+    [self.tableView reloadData];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
@@ -48,16 +53,18 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    //AppDelegate* app = [AppDelegate getInstance];
-    
-    self.persons = [Person getPersonsFromJSONData:data];
-    
+    AppDelegate* app = [AppDelegate getInstance];
+    app.persons = [Person getPersonsFromJSONData:data];
     [self.tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    AppDelegate* app = [AppDelegate getInstance];
+    if (app.persons) {
+        return app.persons.count;
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,8 +73,8 @@
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"PersonCell"];
     }
-    
-    NSDictionary* person = [self.persons objectAtIndex:indexPath.row];
+    AppDelegate* app = [AppDelegate getInstance];
+    NSDictionary* person = [app.persons objectAtIndex:indexPath.row];
     if (person) {
         cell.textLabel.text = [person objectForKey:@"Name"];
         cell.detailTextLabel.text = [person objectForKey:@"EmployeeId"];
@@ -79,10 +86,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.itemSelectDelegate) {
-        NSDictionary* dict = [self.persons objectAtIndex:indexPath.row];
-        Person* p = [Person personWithJSONObject:dict];
-        if (p) {
-            [self.itemSelectDelegate onItemSelected:p AtRow:indexPath.row];
+        AppDelegate* app = [AppDelegate getInstance];
+        if (indexPath.row < app.persons.count) {
+            NSDictionary* dict = [app.persons objectAtIndex:indexPath.row];
+            Person* p = [Person personWithJSONObject:dict];
+            if (p) {
+                [self.itemSelectDelegate onItemSelected:p AtRow:indexPath.row];
+            }
         }
     }
 }

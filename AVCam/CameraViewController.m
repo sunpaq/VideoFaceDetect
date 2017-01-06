@@ -57,7 +57,7 @@ static void * SessionRunningContext = &SessionRunningContext;
 {
     if ([segue.identifier isEqualToString:@"showResultView"]) {
         ResultViewController* res = segue.destinationViewController;
-        res.onCloseDelegate = self;
+        res.photoTakenDelegate = self;
         res.resultImage = self.faceImage;
         
         if (self.personRef) {
@@ -71,7 +71,48 @@ static void * SessionRunningContext = &SessionRunningContext;
 
 - (void) onFaceDetected
 {
-    [self performSegueWithIdentifier:@"showResultView" sender:self];
+    //stop camera
+    if (self.session.isRunning) {
+        [self.session stopRunning];
+    }
+    
+    if (self.faceDetectMode) {
+        [self performSegueWithIdentifier:@"showResultView" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"showResultView" sender:self];
+    }
+}
+
+- (void)onPhotoTaken:(UIImage *)photo
+{
+    NSLog(@"send out photo of %@\n", self.personRef.Name);
+}
+
+- (void)onResultViewClosedWithInfo:(NSString *)info
+{
+    if ([info isEqualToString:@"SwipeLeft"]) {
+        [self.session stopRunning];
+        [self dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    }
+    if ([info isEqualToString:@"SwipeDown"]) {
+        [self.session stopRunning];
+        if (self.faceDetectMode) {
+            
+            NSLog(@"signin %@\n", self.personRef.Name);
+            
+            [self.session startRunning];
+        } else {
+            //add face
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        }
+    }
+    if ([info isEqualToString:@"SwipeUp"]) {
+        [self.session startRunning];
+    }
 }
 
 //[dict setValue:@"true" forKey:@"hasSmile"];
@@ -145,14 +186,16 @@ static bool detected = false;
             NSString* info = [NSString stringWithFormat:@"姓名：%@ 置信度：%f 标签：%@",
                               name, [confidence floatValue], tag];
             
+            if (!self.personRef) {
+                self.personRef = [Person new];
+            }
+            self.personRef.Name = name;
+            self.personRef.EmployeeId = person_id;
+            self.personRef.Group = tag;
+            
             self.navigationItem.title = info;
             //self.faceLabel.backgroundColor = [UIColor redColor];
             //self.faceLabel.alpha = 0.1;
-            
-            //stop camera
-            if (self.session.isRunning) {
-                [self.session stopRunning];
-            }
             
             //pop up
             if (self.faceImage) {
@@ -172,6 +215,9 @@ static bool detected = false;
     if (face) {
         self.facePreview.image = face.grayFace;
         self.faceImage = face.colorFace;
+    } else {
+        NSLog(@"error: face detected but image is nil\n");
+        return;
     }
     
     //main UI thread

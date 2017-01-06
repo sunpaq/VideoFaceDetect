@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AVCam/AppDelegate.m"
-            timestampString = "505363908.04512"
+            timestampString = "505379029.01559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "-uploadPhoto:"
             landmarkType = "7">
          </BreakpointContent>

@@ -12,7 +12,7 @@
 @property (strong, nonatomic) NSString* groupName;
 @property (nonatomic) NSNumber* lastAssignedPersonId;
 
-@property (nonatomic, strong) NSDictionary* personDatas;
+@property (nonatomic) NSArray* persons;
 
 + (AppDelegate*) getInstance;
 - (void) addPersonName:(NSString*)name WithId:(NSString*)pid WithTag:(NSString*)tag;

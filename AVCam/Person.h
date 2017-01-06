@@ -22,9 +22,14 @@
 @property (nonatomic, strong) NSString* Name;
 
 + (NSArray*) getPersonsFromJSONData:(NSData*)data;
++ (NSArray*) getPersonsFromJSOString:(NSString*)string;
 + (Person*) personWithJSONObject:(NSDictionary*)dict;
 
 - (Person*) loadJSONObject:(NSDictionary*)dict;
 - (NSDictionary*) jsonObject;
+
+//for test
++ (NSString*) dummyPersonsString;
++ (NSArray*) dummyPersons;
 
 @end

@@ -72,6 +72,7 @@
 		F80277F71E1F436300F7D900 /* AVCaptureDeviceDiscoverySession+Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVCaptureDeviceDiscoverySession+Utilities.h"; sourceTree = "<group>"; };
 		F80277F81E1F5CA300F7D900 /* DetectedFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectedFace.h; sourceTree = "<group>"; };
 		F80277F91E1F5CB800F7D900 /* DetectedFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetectedFace.m; sourceTree = "<group>"; };
+		F80277FB1E1F73B100F7D900 /* PhotoTakenDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoTakenDelegate.h; sourceTree = "<group>"; };
 		F85AB5C91E1DECCA0076104D /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		F85AB5CB1E1DECDB0076104D /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		F85AB5CC1E1E21460076104D /* SplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
@@ -157,6 +158,7 @@
 			children = (
 				F85AB5D01E1E25E20076104D /* DataModel */,
 				F85AB5CF1E1E22E90076104D /* ItemSelectedDelegate.h */,
+				F80277FB1E1F73B100F7D900 /* PhotoTakenDelegate.h */,
 				220626821A1E345E00A45150 /* AppDelegate.h */,
 				220626831A1E345E00A45150 /* AppDelegate.m */,
 				F85AB5CE1E1E21580076104D /* SplitViewController.h */,

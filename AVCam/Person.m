@@ -38,9 +38,56 @@
     return persons;
 }
 
++ (NSArray*) getPersonsFromJSOString:(NSString*)string
+{
+    NSData* data = [NSData dataWithBytes:[string cStringUsingEncoding:NSUTF8StringEncoding] length:string.length];
+    if (data) {
+        return [self getPersonsFromJSONData:data];
+    }
+    return nil;
+}
+
 + (Person*) personWithJSONObject:(NSDictionary*)dict
 {
     return [[[Person alloc] init] loadJSONObject:dict];
+}
+
++ (NSString*) dummyPersonsString
+{
+    return [[self dummyPersons] description];
+}
+
++ (NSArray*) dummyPersons
+{
+    Person* p1 = [Person new];
+    Person* p2 = [Person new];
+    Person* p3 = [Person new];
+
+    p1.EmployeeId = @"000001";
+    p1.FirstName  = @"Yuli";
+    p1.Group      = @"SODEC";
+    p1.GroupId    = [NSNumber numberWithInt:1];
+    p1.Id         = [NSNumber numberWithInt:1];
+    p1.LastName   = @"Sun";
+    p1.Name       = @"Yuli Sun";
+    
+    p2.EmployeeId = @"000002";
+    p2.FirstName  = @"Chris";
+    p2.Group      = @"SODEC";
+    p2.GroupId    = [NSNumber numberWithInt:1];
+    p2.Id         = [NSNumber numberWithInt:2];
+    p2.LastName   = @"Qian";
+    p2.Name       = @"Chris Qian";
+    
+    p3.EmployeeId = @"000003";
+    p3.FirstName  = @"Evan";
+    p3.Group      = @"SODEC";
+    p3.GroupId    = [NSNumber numberWithInt:1];
+    p3.Id         = [NSNumber numberWithInt:3];
+    p3.LastName   = @"Yang";
+    p3.Name       = @"Evan Yang";
+    
+    return [NSArray arrayWithObjects:[p1 jsonObject], [p2 jsonObject], [p3 jsonObject], nil];
 }
 
 - (NSDictionary*) jsonObject

@@ -37,9 +37,9 @@ static AppDelegate* _instance = nil;
         self.lastAssignedPersonId = [NSNumber numberWithInt:1];
     }
     
-    self.personDatas = [[NSUserDefaults standardUserDefaults] objectForKey:@"personDatas"];
-    if (self.personDatas == nil) {
-        self.personDatas = [NSDictionary dictionary];
+    self.persons = [[NSUserDefaults standardUserDefaults] objectForKey:@"persons"];
+    if (self.persons == nil) {
+        self.persons = [NSArray array];
     }
 }
 
@@ -47,7 +47,7 @@ static AppDelegate* _instance = nil;
 {
     NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
     [defs setObject:self.lastAssignedPersonId forKey:@"lastAssignedPersonId"];
-    [defs setObject:self.personDatas forKey:@"personDatas"];
+    [defs setObject:self.persons forKey:@"persons"];
 }
 
 + (AppDelegate*) getInstance
@@ -62,23 +62,28 @@ static AppDelegate* _instance = nil;
 
 - (void) addPersonName:(NSString*)name WithId:(NSString*)pid WithTag:(NSString*)tag
 {
-    if (self.personDatas) {
-        [self increasePersonId];
-        
-        NSMutableDictionary* dict = [self.personDatas mutableCopy];
-        [dict setObject:name forKey:[NSString stringWithFormat:@"person%@",
-                                     [self.lastAssignedPersonId stringValue]]];
-        
-        self.personDatas = dict;
+    if (self.persons) {
+//        [self increasePersonId];
+//        
+//        NSMutableDictionary* dict = [self.persons mutableCopy];
+//        [dict setObject:name forKey:[NSString stringWithFormat:@"person%@",
+//                                     [self.lastAssignedPersonId stringValue]]];
+//        
+//        self.persons = dict;
     }
 }
 
 - (NSString*) getPersonNameFromId:(NSString*)personId
 {
-    if (self.personDatas) {
-        return [self.personDatas objectForKey:personId];
+    NSString* name = @"火星网友";
+    if (self.persons) {
+        for (Person* p in self.persons) {
+            if ([personId isEqualToString:[p.Id stringValue]]) {
+                name = p.Name;
+            }
+        }
     }
-    return @"火星网友";
+    return name;
 }
 
 - (void) uploadPhotoToTencent:(UIImage*)photo PersonId:(NSString*)pid PersonName:(NSString*)name Tag:(NSString*)tag
@@ -135,7 +140,7 @@ static AppDelegate* _instance = nil;
 {
     NSMutableURLRequest* req = [[NSURLRequest requestWithURL:[NSURL URLWithString:endpoint]
                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                             timeoutInterval:30] mutableCopy];
+                                             timeoutInterval:10] mutableCopy];
     req.HTTPMethod = GET_METHOD;
     //req.HTTPBody = @"";
     

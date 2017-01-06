@@ -5,6 +5,7 @@
 #import "PhotoCaptureDelegate.h"
 #import "Person.h"
 #import "DetectedFace.h"
+#import "PhotoTakenDelegate.h"
 
 typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     AVCamSetupResultSuccess,
@@ -12,11 +13,11 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     AVCamSetupResultSessionConfigurationFailed
 };
 
-@interface CameraViewController : UIViewController
+@interface CameraViewController : UIViewController <PhotoTakenDelegate>
 
 //YES: facedetect NO: addface
 @property (atomic) BOOL faceDetectMode;
-@property (atomic, weak) Person* personRef;
+@property (atomic, strong) Person* personRef;
 
 // Session management.
 @property (nonatomic, weak) IBOutlet CamPreviewView *previewView;

@@ -14,7 +14,7 @@
     AppDelegate* app = [AppDelegate getInstance];
     self.addFaceButton.title = [NSString stringWithFormat:@"加脸入组（%@）", app.groupName];
     
-    self.existingPersons.text = [[app.personDatas allKeys] description];
+    //self.existingPersons.text = [[app.personDatas allKeys] description];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info

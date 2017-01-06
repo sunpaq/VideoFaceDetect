@@ -10,15 +10,16 @@
 #define ResultViewController_h
 
 #import <UIKit/UIKit.h>
+#import "PhotoTakenDelegate.h"
 
 @interface ResultViewController : UIViewController
 
-@property (weak, nonatomic) id onCloseDelegate;
+@property (weak, nonatomic) id<PhotoTakenDelegate> photoTakenDelegate;
 
-@property (weak, nonatomic) UIImage*  resultImage;
-@property (weak, nonatomic) NSString* resultText1;
-@property (weak, nonatomic) NSString* resultText2;
-@property (weak, nonatomic) NSString* resultText3;
+@property (strong, nonatomic) UIImage*  resultImage;
+@property (strong, nonatomic) NSString* resultText1;
+@property (strong, nonatomic) NSString* resultText2;
+@property (strong, nonatomic) NSString* resultText3;
 
 @property (weak, nonatomic) IBOutlet UIImageView *resultImageView;
 @property (weak, nonatomic) IBOutlet UILabel *resultLabel1;

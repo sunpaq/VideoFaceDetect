@@ -24,12 +24,31 @@
         self.nameText.text       = _person.Name;
         self.lastNameText.text   = _person.LastName;
         self.firstNameText.text  = _person.FirstName;
+        
+        self.personIdText.hidden = NO;
+        self.groupIdText.hidden  = NO;
+        self.groupNameText.hidden  = NO;
+        self.employeeIdText.hidden = NO;
+        self.nameText.hidden       = NO;
+        self.lastNameText.hidden   = NO;
+        self.firstNameText.hidden  = NO;
+        
+    } else {
+        
+        self.personIdText.hidden = YES;
+        self.groupIdText.hidden  = YES;
+        self.groupNameText.hidden  = YES;
+        self.employeeIdText.hidden = YES;
+        self.nameText.hidden       = YES;
+        self.lastNameText.hidden   = YES;
+        self.firstNameText.hidden  = YES;
     }
 }
 
 - (void) viewDidLoad
 {
     [super viewDidLoad];
+    [self refreshUI];
 }
 
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
@@ -48,7 +67,6 @@
         CameraViewController* camvc = segue.destinationViewController;
         camvc.faceDetectMode = NO;
         camvc.personRef = self.person;
-        
     }
 }
 
