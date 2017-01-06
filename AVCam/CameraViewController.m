@@ -6,42 +6,16 @@
 
 static void * SessionRunningContext = &SessionRunningContext;
 
-@implementation AVCaptureDeviceDiscoverySession (Utilities)
-
-- (NSInteger)uniqueDevicePositionsCount
-{
-	NSMutableArray<NSNumber *> *uniqueDevicePositions = [NSMutableArray array];
-	
-	for ( AVCaptureDevice *device in self.devices ) {
-		if ( ! [uniqueDevicePositions containsObject:@(device.position)] ) {
-			[uniqueDevicePositions addObject:@(device.position)];
-		}
-	}
-	
-	return uniqueDevicePositions.count;
-}
-
-@end
-
+//Private
 @interface CameraViewController ()
 @property (nonatomic, strong) VideoCaptureDelegate* sampleBufferDelegate;
 @end
 
 @implementation CameraViewController
 
-//+(instancetype)alloc
-//{
-//    //self=[super alloc];
-//    if (self) {
-//        
-//        return self;
-//    }
-//    return nil;
-//}
-
 - (void) setupDefaults
 {
-    self.faceDetectMode = NO;
+    self.faceDetectMode = YES;
 }
 
 - (instancetype)init
@@ -82,16 +56,20 @@ static void * SessionRunningContext = &SessionRunningContext;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"showResultView"]) {
-        ResultViewController* res = (ResultViewController*)segue.destinationViewController;
+        ResultViewController* res = segue.destinationViewController;
         res.onCloseDelegate = self;
         res.resultImage = self.faceImage;
-        res.resultText1 = @"";
-        res.resultText2 = @"";
-        res.resultText3 = @"";
+        
+        if (self.personRef) {
+            res.resultText1 = self.personRef.Name;
+            res.resultText2 = self.personRef.EmployeeId;
+            res.resultText3 = self.personRef.Group;
+        }
+
     }
 }
 
-- (void) onFaceDetected:(UIImage*)faceImage
+- (void) onFaceDetected
 {
     [self performSegueWithIdentifier:@"showResultView" sender:self];
 }
@@ -104,9 +82,8 @@ static void * SessionRunningContext = &SessionRunningContext;
 //[dict setValue:[NSValue valueWithCGPoint:f.mouthPosition] forKey:@"mouthPosition"];
 //[dict setValue:[NSNumber numberWithFloat:f.faceAngle] forKey:@"faceAngle"];
 
-static int count = 0;
+//static int count = 0;
 static bool detected = false;
-
 
 - (void) callDetectFaceAPI:(UIImage*)face
 {
@@ -140,7 +117,9 @@ static bool detected = false;
             }
             
             //pop up
-            [self onFaceDetected:self.faceImage];
+            if (self.faceImage) {
+                [self onFaceDetected];
+            }
         }
         
     }failureBlock:^(NSError *error) {
@@ -176,7 +155,9 @@ static bool detected = false;
             }
             
             //pop up
-            [self onFaceDetected:self.faceImage];
+            if (self.faceImage) {
+                [self onFaceDetected];
+            }
         }
         
     } failureBlock:^(NSError *error) {
@@ -185,34 +166,30 @@ static bool detected = false;
     }];
 }
 
-- (void) updateFaceLabelFrameInUIThread:(CGRect)frame WithData:(NSDictionary*)data
+- (void) onFaceDetected:(DetectedFace*)face
 {
+    //background thread
+    if (face) {
+        self.facePreview.image = face.grayFace;
+        self.faceImage = face.colorFace;
+    }
+    
+    //main UI thread
     dispatch_async(dispatch_get_main_queue(), ^{
-        
-        count++;
-        if (self.faceImage) {
-            count = 0;
-            
-            NSData* pngdata = UIImageJPEGRepresentation([self.faceImage convertToGrayscale], 1.0);
-            if (pngdata) {
-                NSLog(@"png image size: %lu\n", (unsigned long)[pngdata length]);
-            }
-            
-            UIImage* face = [UIImage imageWithData:pngdata];
-            if (face) {
-                self.faceView.image = face;
-            }
-            
-            [self callIdentifyFaceAPI:face];
+        //face detect
+        if (self.faceDetectMode) {
+            [self callIdentifyFaceAPI:face.grayFace];
         }
+        //add face
         else {
-            //NSLog(@"error: image is nil");
+            //pop up
+            if (self.faceImage) {
+                [self onFaceDetected];
+            }
         }
         
 //        CGRect scaleFrame = frame;
 //        CGRect viewFrame  = _previewView.frame;
-//        
-
         
         //NSNumber* tid = [self.data objectForKey:@"trackingFrameCount"];
         //[self.faceLabel setText:[NSString stringWithFormat:@"%d", tid.intValue]];
@@ -237,7 +214,7 @@ static bool detected = false;
 //    [self.view addSubview:self.faceLabel];
     
     //full of the view
-    self.previewView.frame = self.view.frame;
+    //self.previewView.frame = self.view.frame;
     
     self.sampleBufferDelegate = [[VideoCaptureDelegate alloc] initWithCameraViewController:self];
 	
@@ -582,7 +559,7 @@ static bool detected = false;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
 	if ( context == SessionRunningContext ) {
-		BOOL isSessionRunning = [change[NSKeyValueChangeNewKey] boolValue];
+		//BOOL isSessionRunning = [change[NSKeyValueChangeNewKey] boolValue];
 		
 		dispatch_async( dispatch_get_main_queue(), ^{
 			// Only enable the ability to change camera if the device has more than one camera.

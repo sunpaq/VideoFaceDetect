@@ -40,19 +40,26 @@
     CVImageBufferRef cvbuff = CMSampleBufferGetImageBuffer(sampleBuffer);
     if (sampleBuffer == nil || cvbuff == nil) {
         NSLog(@"error: sampleBuffer or cvbuff is nil");
+        return;
     }
     
     CIImage* cimage = [CIImage imageWithCVImageBuffer:cvbuff];
     if (cimage == nil) {
         NSLog(@"error: cimage is nil");
+        return;
     }
     
     NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
     NSArray* features = [self.faceDetector featuresInImage:cimage];
     
     float faceRotation;
+    BOOL faceDetected = false;
     for (CIFaceFeature* f in features) {
         _frame = f.bounds;
+        
+        if (_frame.size.width > 50 && _frame.size.height > 50) {
+            faceDetected = true;
+        }
         
 //        if (f.hasFaceAngle) {
 //            faceRotation = f.faceAngle;
@@ -82,23 +89,12 @@
         
     }
     
-    UIImage* uimage = [UIImage imageWithCIImage:cimage];
-    if (uimage == nil) {
-        NSLog(@"error: uimage is nil");
+    if (!faceDetected) {
+        NSLog(@"error: no face detected");
+        return;
     }
     
-    if (cimage) {
-        CGRect rect4to3 = [Utility resizeRect:_frame ByHWRatio:(CGFloat)4/3];
-        CGImageRef facecrop = [self.cicontext createCGImage:cimage
-                                                   fromRect:rect4to3];
-        UIImage* face = [UIImage imageWithCGImage:facecrop];
-        self.camviewController.faceImage = face;
-    }
-    
-    CGRect scaleRect = [Utility scaleRectOfBigSize:uimage.size BySmallRect:_frame];
-    _scaleFrame = [Utility mirrorRect:scaleRect];
-    
-    [self.camviewController updateFaceLabelFrameInUIThread:_scaleFrame WithData:dict];
+    [self.camviewController onFaceDetected:[[DetectedFace alloc] initWithOriginCIImage:cimage FaceFrame:_frame]];
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections

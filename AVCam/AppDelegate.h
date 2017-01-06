@@ -22,5 +22,6 @@
 - (void) removePhotoFromTencent:(NSString*)pid;
 
 - (void) fetchPersonList:(id<NSURLConnectionDelegate>)delegate WithEndPoint:(NSString*)endpoint;
+- (void) uploadPhoto:(NSData*)pngdata;
 
 @end

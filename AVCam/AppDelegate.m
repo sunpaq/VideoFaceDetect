@@ -1,7 +1,9 @@
 #import "AppDelegate.h"
 
-#define END_POINT @"http://eccwcl32138.global.schindler.com/FaceManagerService/api/Persons"
+#define END_POINT_LIST_PERSONS @"http://eccwcl32138.global.schindler.com/FaceManagerService/api/Persons"
+#define END_POINT_UP_PHOTO @"http://eccwcl32138.global.schindler.com/FaceManagerService/api/UploadPhoto"
 #define GET_METHOD @"GET"
+#define POST_METHOD @"POST"
 
 #define NETWORK_ERR @"网络错误"
 #define DEL_SUCCESS @"删除成功"
@@ -139,6 +141,21 @@ static AppDelegate* _instance = nil;
     
     NSURLConnection* connect = [NSURLConnection connectionWithRequest:req delegate:delegate];
     [connect start];
+}
+
+- (void) uploadPhoto:(NSData*)pngdata
+{
+    NSMutableURLRequest* req = [[NSURLRequest requestWithURL:[NSURL URLWithString:END_POINT_UP_PHOTO]
+                                                 cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                             timeoutInterval:30] mutableCopy];
+    req.HTTPMethod = POST_METHOD;
+    req.HTTPBody   = pngdata;
+    
+    [NSURLConnection sendAsynchronousRequest:req
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+        
+    }];
 }
 
 

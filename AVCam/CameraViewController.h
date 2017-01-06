@@ -3,12 +3,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CamPreviewView.h"
 #import "PhotoCaptureDelegate.h"
-
-@interface AVCaptureDeviceDiscoverySession (Utilities)
-
-- (NSInteger)uniqueDevicePositionsCount;
-
-@end
+#import "Person.h"
+#import "DetectedFace.h"
 
 typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     AVCamSetupResultSuccess,
@@ -20,6 +16,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 
 //YES: facedetect NO: addface
 @property (atomic) BOOL faceDetectMode;
+@property (atomic, weak) Person* personRef;
 
 // Session management.
 @property (nonatomic, weak) IBOutlet CamPreviewView *previewView;
@@ -40,7 +37,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;
 
 // Face detect
-@property (weak, nonatomic) IBOutlet UIImageView *faceView;
+@property (weak, nonatomic) IBOutlet UIImageView *facePreview;
 //@property (nonatomic, strong) UILabel *faceLabel;
 @property (nonatomic, strong) UIImage *faceImage;
 @property (weak, nonatomic) IBOutlet UISwitch *beautySwitch;
@@ -48,7 +45,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 // Face management
 
 
-- (void) updateFaceLabelFrameInUIThread:(CGRect)frame WithData:(NSDictionary*)data;
+- (void) onFaceDetected:(DetectedFace*)face;
 
 - (void) resultViewClosed;
 @end
