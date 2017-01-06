@@ -11,15 +11,15 @@
 
 @interface Person : NSObject
 
-@property (nonatomic, strong) UIImage* faceImage;
+@property (atomic, strong) UIImage* faceImage;
 
-@property (nonatomic, strong) NSString* EmployeeId;
-@property (nonatomic, strong) NSString* FirstName;
-@property (nonatomic, strong) NSString* Group;
-@property (nonatomic, strong) NSNumber* GroupId;
-@property (nonatomic, strong) NSNumber* Id;
-@property (nonatomic, strong) NSString* LastName;
-@property (nonatomic, strong) NSString* Name;
+@property (atomic, strong) NSString* EmployeeId;
+@property (atomic, strong) NSString* FirstName;
+@property (atomic, strong) NSString* Group;
+@property (atomic, strong) NSNumber* GroupId;
+@property (atomic, strong) NSNumber* PersonId;
+@property (atomic, strong) NSString* LastName;
+@property (atomic, strong) NSString* Name;
 
 + (NSArray*) getPersonsFromJSONData:(NSData*)data;
 + (NSArray*) getPersonsFromJSOString:(NSString*)string;

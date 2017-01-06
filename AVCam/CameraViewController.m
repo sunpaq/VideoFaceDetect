@@ -59,13 +59,6 @@ static void * SessionRunningContext = &SessionRunningContext;
         ResultViewController* res = segue.destinationViewController;
         res.photoTakenDelegate = self;
         res.resultImage = self.faceImage;
-        
-        if (self.personRef) {
-            res.resultText1 = self.personRef.Name;
-            res.resultText2 = self.personRef.EmployeeId;
-            res.resultText3 = self.personRef.Group;
-        }
-
     }
 }
 
@@ -85,7 +78,7 @@ static void * SessionRunningContext = &SessionRunningContext;
 
 - (void)onPhotoTaken:(UIImage *)photo
 {
-    NSLog(@"send out photo of %@\n", self.personRef.Name);
+    self.personRef.faceImage = photo;
 }
 
 - (void)onResultViewClosedWithInfo:(NSString *)info
@@ -106,7 +99,26 @@ static void * SessionRunningContext = &SessionRunningContext;
         } else {
             //add face
             [self dismissViewControllerAnimated:YES completion:^{
-                
+                AppDelegate* app = [AppDelegate getInstance];
+
+                [app.sdk newPerson:self.personRef.faceImage
+                    personId:[self.personRef.PersonId stringValue]
+                    groupIds:@[app.groupName]
+                    personName:self.personRef.Name
+                         personTag:self.personRef.LastName
+                      successBlock:^(id responseObject) {
+                          NSDictionary* dict = responseObject;
+                          NSNumber* errcode = [dict objectForKey:@"errorcode"];
+                          NSString* errmsg = [dict objectForKey:@"errormsg"];
+                          if (errcode) {
+                              
+                          }
+                          
+                          
+                          NSLog(@"send out photo of %@\n", self.personRef.Name);
+                      } failureBlock:^(NSError *error) {
+                          NSLog(@"faild send photo of %@\n", self.personRef.Name);
+                      }];
             }];
         }
     }
@@ -182,16 +194,15 @@ static bool detected = false;
             NSNumber* confidence = [face objectForKey:@"confidence"];
             NSString* tag = [face objectForKey:@"tag"];
             
-            NSString* name = [app getPersonNameFromId:person_id];
+            NSString* name = person_id; //[app getPersonNameFromId:person_id];
             NSString* info = [NSString stringWithFormat:@"姓名：%@ 置信度：%f 标签：%@",
                               name, [confidence floatValue], tag];
             
-            if (!self.personRef) {
-                self.personRef = [Person new];
+            if (self.personRef) {
+                self.personRef.Name = name;
+                self.personRef.EmployeeId = person_id;
+                self.personRef.Group = tag;
             }
-            self.personRef.Name = name;
-            self.personRef.EmployeeId = person_id;
-            self.personRef.Group = tag;
             
             self.navigationItem.title = info;
             //self.faceLabel.backgroundColor = [UIColor redColor];

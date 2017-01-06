@@ -16,7 +16,7 @@ static AppDelegate* _instance = nil;
 
 //Private
 @interface AppDelegate()
-- (void) increasePersonId;
+//- (void) increasePersonId;
 @end
 
 @implementation AppDelegate
@@ -24,7 +24,7 @@ static AppDelegate* _instance = nil;
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
     _instance = self;
-    _groupName = @"schindler-sodec";
+    _groupName = @"all-star";
 
     NSString *auth = [Auth appSign:1000000 userId:nil];
     self.sdk = [[TXQcloudFrSDK alloc] initWithName:[Conf instance].appId
@@ -78,8 +78,13 @@ static AppDelegate* _instance = nil;
     NSString* name = @"火星网友";
     if (self.persons) {
         for (Person* p in self.persons) {
-            if ([personId isEqualToString:[p.Id stringValue]]) {
-                name = p.Name;
+            if (p) {
+                NSString* idstr = [p.PersonId stringValue];
+                if (idstr) {
+                    if ([personId isEqualToString:idstr]) {
+                        name = p.Name;
+                    }
+                }
             }
         }
     }

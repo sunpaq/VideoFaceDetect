@@ -10,7 +10,6 @@
 @property (atomic) CGRect scaleFrame;
 
 - (DetectedFace*) initWithColorImage:(UIImage*)image ScaleFrame:(CGRect)frame;
-
 - (DetectedFace*) initWithOriginCIImage:(CIImage*)cimage FaceFrame:(CGRect)frame;
 
 @end

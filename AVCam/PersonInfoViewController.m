@@ -11,13 +11,14 @@
 #import "CameraViewController.h"
 #import "Utility.h"
 #import "Person.h"
+#import "AppDelegate.h"
 
 @implementation PersonInfoViewController
 
 - (void) refreshUI
 {
     if (_person) {
-        self.personIdText.text = [_person.Id stringValue];
+        self.personIdText.text = [_person.PersonId stringValue];
         self.groupIdText.text  = [_person.GroupId stringValue];
         self.groupNameText.text  = _person.Group;
         self.employeeIdText.text = _person.EmployeeId;
@@ -74,6 +75,21 @@
 {
     self.person = person;
     [self refreshUI];
+}
+
+-(IBAction)onDeletePerson:(id)sender
+{
+    AppDelegate* app = [AppDelegate getInstance];
+    if (self.person.PersonId) {
+        [app.sdk delPerson:[self.person.PersonId stringValue] successBlock:^(id responseObject) {
+            //
+            
+        } failureBlock:^(NSError *error) {
+            //
+            
+        }];
+    }
+
 }
 
 @end

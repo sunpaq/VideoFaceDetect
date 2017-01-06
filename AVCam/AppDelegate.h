@@ -13,6 +13,7 @@
 @property (nonatomic) NSNumber* lastAssignedPersonId;
 
 @property (nonatomic) NSArray* persons;
+@property (atomic, retain) Person* currentDetectedPerson;
 
 + (AppDelegate*) getInstance;
 - (void) addPersonName:(NSString*)name WithId:(NSString*)pid WithTag:(NSString*)tag;

@@ -168,9 +168,16 @@
                             <constraint firstItem="9K9-qy-JRe" firstAttribute="top" secondItem="y7Y-E5-WO7" secondAttribute="bottom" constant="363" id="ucg-b2-tsw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="8Jg-F2-wf0"/>
+                    <navigationItem key="navigationItem" id="8Jg-F2-wf0">
+                        <barButtonItem key="rightBarButtonItem" title="删除服务器端数据" id="PcK-IC-J1l">
+                            <connections>
+                                <action selector="onDeletePerson:" destination="1Yb-Rx-iFK" id="lVW-PO-kTz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addFaceButton" destination="mR6-op-6Vc" id="ogi-Cd-UwR"/>
+                        <outlet property="deletePersonButton" destination="PcK-IC-J1l" id="SLa-3R-b0F"/>
                         <outlet property="employeeIdText" destination="YaI-sC-JuN" id="N6g-Xo-P8I"/>
                         <outlet property="faceView" destination="y7Y-E5-WO7" id="j91-As-vJi"/>
                         <outlet property="firstNameText" destination="O1b-1t-sZ9" id="zRd-0A-t5M"/>

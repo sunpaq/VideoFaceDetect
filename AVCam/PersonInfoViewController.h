@@ -16,6 +16,7 @@
 @interface PersonInfoViewController : UIViewController <ItemSelectedDelegate>
 
 //UI
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *deletePersonButton;
 @property (weak, nonatomic) IBOutlet UIButton *addFaceButton;
 @property (weak, nonatomic) IBOutlet UIImageView *faceView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
@@ -30,6 +31,9 @@
 
 //Data Model
 @property (retain, nonatomic) Person* person;
+
+//Actions
+-(IBAction)onDeletePerson:(id)sender;
 
 @end
 

@@ -1,5 +1,6 @@
 
 #import "Person.h"
+#import "AppDelegate.h"
 
 @implementation Person
 
@@ -17,7 +18,7 @@
     self.FirstName  = FirstName;
     self.Group      = Group;
     self.GroupId    = GroupId;
-    self.Id         = Id;
+    self.PersonId   = Id;
     self.LastName   = LastName;
     self.Name       = Name;
     
@@ -64,28 +65,28 @@
     Person* p3 = [Person new];
 
     p1.EmployeeId = @"000001";
-    p1.FirstName  = @"Yuli";
-    p1.Group      = @"SODEC";
+    p1.FirstName  = @"Spider";
+    p1.Group      = [AppDelegate getInstance].groupName;
     p1.GroupId    = [NSNumber numberWithInt:1];
-    p1.Id         = [NSNumber numberWithInt:1];
-    p1.LastName   = @"Sun";
-    p1.Name       = @"Yuli Sun";
+    p1.PersonId   = [NSNumber numberWithInt:1];
+    p1.LastName   = @"Man";
+    p1.Name       = @"Spider Man";
     
     p2.EmployeeId = @"000002";
-    p2.FirstName  = @"Chris";
-    p2.Group      = @"SODEC";
+    p2.FirstName  = @"Iron";
+    p2.Group      = [AppDelegate getInstance].groupName;
     p2.GroupId    = [NSNumber numberWithInt:1];
-    p2.Id         = [NSNumber numberWithInt:2];
-    p2.LastName   = @"Qian";
-    p2.Name       = @"Chris Qian";
+    p2.PersonId   = [NSNumber numberWithInt:2];
+    p2.LastName   = @"Man";
+    p2.Name       = @"Iron Man";
     
     p3.EmployeeId = @"000003";
-    p3.FirstName  = @"Evan";
-    p3.Group      = @"SODEC";
+    p3.FirstName  = @"Ant";
+    p3.Group      = [AppDelegate getInstance].groupName;
     p3.GroupId    = [NSNumber numberWithInt:1];
-    p3.Id         = [NSNumber numberWithInt:3];
-    p3.LastName   = @"Yang";
-    p3.Name       = @"Evan Yang";
+    p3.PersonId   = [NSNumber numberWithInt:3];
+    p3.LastName   = @"Man";
+    p3.Name       = @"Ant Man";
     
     return [NSArray arrayWithObjects:[p1 jsonObject], [p2 jsonObject], [p3 jsonObject], nil];
 }
@@ -96,7 +97,7 @@
              @"FirstName":self.FirstName,
              @"Group":self.Group,
              @"GroupId":self.GroupId,
-             @"Id":self.Id,
+             @"Id":self.PersonId,
              @"LastName":self.LastName,
              @"Name":self.Name};
 }
